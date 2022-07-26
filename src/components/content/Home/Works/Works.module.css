@@ -1,0 +1,9 @@
+.work_item {
+  margin-top: 10px;
+  text-align: center;
+  border: 1px solid #DDDDDD73;
+  border-radius: 6px;
+}
+.work_item .work_card_img img {
+  max-width: 100px;
+}

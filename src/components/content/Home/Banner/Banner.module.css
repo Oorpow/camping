@@ -1,0 +1,26 @@
+.home_banner {
+  width: 100%;
+  height: 800px;
+  background: url('../../../../assets/images/banners/home_banner.png') no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.home_banner_mask {
+  position: absolute;
+  inset: 0;
+  background-color: #222;
+  opacity: 0.6;
+  z-index: 2;
+}
+.home_banner_title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  color: #fff;
+}
+.home_banner_title p {
+  margin-top: 20px;
+  line-height: 28px;
+}

@@ -1,0 +1,28 @@
+@import url('../../../assets/style/global.less');
+
+.header {
+    height: 80px;
+    border-bottom: 1px solid rgb(228, 228, 228);
+
+    nav {
+        ul {
+            display: flex;
+            justify-content: space-around;
+
+            a {
+                color: #000;
+            }
+
+            .activeLink {
+                color: @mainColor;
+            }
+
+            .register {
+                color: #fff;
+                background-color: @mainColor;
+                padding: 8px 24px;
+                border-radius: 30px;
+            }
+        }
+    }
+}

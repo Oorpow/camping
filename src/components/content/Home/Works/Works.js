@@ -22,25 +22,23 @@ const Works = () => {
 	]
 
 	return (
-		<Grid container justifyContent="center" style={{ marginTop: '30px' }}>
-			<Grid item xs={11} md={11.5} lg={9.5} xl={8.3}>
+		<Grid
+			container
+			direction="column"
+			style={{ marginTop: '30px' }}
+		>
+			<Grid item xs>
 				<h1>How It Works</h1>
 			</Grid>
-			<Grid
-				container
-				item
-				justifyContent="space-around"
-                lg={10}
-                xl={9}
-			>
+			<Grid container item justifyContent="space-between">
 				{flowList.map((item, i) => (
 					<Grid
 						item
 						p={3}
-						xs={11}
-                        md={3.5}
-                        xl={3}
-                        className={styles.work_item}
+						xs={12}
+						md={3.5}
+						xl={3.5}
+						className={styles.work_item}
 						key={i}
 					>
 						<div className={styles.work_card}>

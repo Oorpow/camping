@@ -1,28 +1,61 @@
 @import url('../../../assets/style/global.less');
 
 .header {
+    width: 1100px;
     height: 80px;
+    line-height: 80px;
     border-bottom: 1px solid rgb(228, 228, 228);
+    margin: auto;
 
-    nav {
-        ul {
-            display: flex;
-            justify-content: space-around;
-
-            a {
-                color: #000;
-            }
-
-            .activeLink {
-                color: @mainColor;
-            }
-
-            .register {
-                color: #fff;
-                background-color: @mainColor;
-                padding: 8px 24px;
-                border-radius: 30px;
+    &_nav_main {
+        display: block;
+        nav {
+            ul {
+                display: flex;
+                justify-content: space-around;
+    
+                a {
+                    color: #000;
+                }
+    
+                .activeLink {
+                    color: @mainColor;
+                }
+    
+                .register {
+                    color: #fff;
+                    background-color: @mainColor;
+                    padding: 8px 24px;
+                    border-radius: 30px;
+                }
             }
         }
+    }   
+}
+
+@media screen and (max-width: 1200px) {
+    .header {
+        width: 800px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .header {
+        width: 700px;
+        &_nav_main {
+            display: none;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        width: 500px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .header {
+        width: 300px;
     }
 }

@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom'
 import Header from '../common/Header/Header'
 import router from '../../router'
 import Loading from '../common/Loading/Loading'
+import Footer from '../common/Footer/Footer'
 
 const Layout = () => {
 	return (
@@ -24,6 +25,7 @@ const Layout = () => {
 					)
 				})}
 			</Routes>
+			<Footer />
 		</Grid>
 	)
 }

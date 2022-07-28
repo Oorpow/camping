@@ -84,7 +84,7 @@ const Header = () => {
 						</ul>
 					</nav>
 				</Grid>
-				<Grid container item xs={10} direction="row-reverse">
+				<Grid container item xs={10} direction="row-reverse" className={styles.header_toggle}>
 					<Tooltip title="">
 						<IconButton
 							onClick={handleClick}

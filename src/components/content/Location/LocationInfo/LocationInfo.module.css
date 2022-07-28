@@ -1,0 +1,20 @@
+.location_info {
+  margin-top: 30px;
+}
+.location_info_head {
+  display: flex;
+}
+.location_info_head img {
+  width: 30px;
+}
+.location_info_head h2 {
+  margin-left: 10px;
+}
+.location_info_content {
+  margin-top: 10px;
+}
+.location_info_content p {
+  font-size: 16px;
+  color: #7E7E7E;
+  font-weight: 400;
+}

@@ -1,0 +1,42 @@
+.card_main {
+    margin-right: 10px;
+
+    &_img {
+        height: 200px;
+    }
+
+    .guests {
+        max-width: 125px;
+        display: flex;
+        align-items: center;
+        border: 1px solid #D6D6D6;
+        padding: 5px 10px;
+        border-radius: 15px;
+    }
+    .price {
+        margin-top: 20px;
+        color: #D6D6D6;
+        font-weight: 300;
+        span {
+            color: #000;
+            font-weight: 500;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .card_main {
+        margin-top: 15px;
+        &_img {
+            height: 350px;
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .card_main {
+        &_img {
+            height: 200px;
+        }
+    }
+}

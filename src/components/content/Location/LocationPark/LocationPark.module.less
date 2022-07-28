@@ -1,0 +1,47 @@
+.park_main {
+    display: flex;
+    margin-top: 10px;
+    flex-flow: row wrap;
+    padding: 0 15px 20px 15px;
+    background-color: #F7F7F7;
+    border: 1px solid #E2E2E2;
+    border-radius: 8px;
+
+    &_item {
+        width: 30%;
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+
+        img {
+            width: 30px;
+        }
+        span {
+            color: #222;
+            font-weight: 400;
+            margin-left: 10px;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .park_main {
+        &_item {
+            width: 45%;
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .park_main {
+        &_item {
+            width: 50%;
+            img {
+                width: 25px;
+            }
+            span {
+                font-size: 16px;
+            }
+        }
+    }
+}

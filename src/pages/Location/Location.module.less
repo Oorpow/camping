@@ -1,0 +1,193 @@
+@import url('../../assets/style/global.less');
+
+@signupBox: {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    background-color: #F7F7F7;
+    border: 1px solid #E2E2E2;
+    border-radius: 8px;
+    padding: 20px 0;
+    position: sticky;
+    top: 10px;
+}
+
+@signupButton: {
+    width: 90%;
+    text-align: center;
+    padding: 10px 0;
+    background-color: @mainColor;
+    color: #fff;
+    border-radius: 20px;
+    margin-top: 15px;
+}
+
+.location {
+    width: 1100px;
+    margin: auto;
+
+    &_main {
+        &_lake {
+            &_title {
+                text-align: left;
+            }
+        }
+    }
+
+    .book_main {
+        .book_box {
+            @signupBox();
+    
+            .book_button {
+                @signupButton();
+            }
+        }
+    }
+
+    .book_main_lg {
+        display: none;
+        margin-top: 30px;
+
+        .book_box {
+            @signupBox();
+            position: unset;
+    
+            .book_button {
+                @signupButton();
+            }
+        }
+    }
+
+    &_lake {
+        h1 {
+            display: flex;
+        }
+        &_imgs {
+            display: flex;
+
+            &_item {
+                display: flex;
+                flex-direction: column;
+                width: 25%;
+                height: 300px;
+                margin: 0 2px 0 0;
+                overflow: hidden;
+
+                &:first-child {
+                    img {
+                        border-top-left-radius: 8px;
+                        border-bottom-left-radius: 8px;
+                    }
+                }
+                &:last-child {
+                    img {
+                        border-top-right-radius: 8px;
+                        border-bottom-right-radius: 8px;
+                    }
+                }
+
+                img {
+                    max-width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    margin-top: 2px;
+                }
+            }
+        }
+        h5 {
+            font-style: italic;
+            color: #444444;
+        }
+    }
+
+    &_map {
+        margin-top: 30px;
+        height: 350px;
+
+        h2 {
+            margin-bottom: 15px;
+        }
+    }
+
+    &_park {
+        margin-top: 80px;
+    }
+
+    &_tents {
+        display: flex;
+        margin-top: 15px;
+    }
+
+}
+
+@media screen and (max-width: 1200px) {
+    .location {
+        &_main {
+            justify-content: center;
+        }
+
+        .book_main {
+            display: none;
+        }
+        .book_main_lg {
+            display: block;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .location {
+        &_lake {
+            &_imgs {
+                &_item {
+                    height: 250px;
+                }
+            }
+        }
+        &_tents {
+            flex-direction: column;
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .location {
+        .location_main_lake_title {
+            font-size: 25px;
+        }
+        &_lake {
+            &_imgs {
+                flex-wrap: wrap;
+
+                &_item {
+                    width: 49%;
+                    flex-direction: row;
+                    height: 180px;
+                    &:first-child {
+                        img {
+                            border-bottom-left-radius: 0;
+                        }
+                    }
+                    &:nth-child(2) {
+                        img {
+                            border-top-right-radius: 8px;
+                        }
+                    }
+                    &:nth-child(3) {
+                        img {
+                            border-bottom-left-radius: 8px;
+                        }
+                    }
+                    &:last-child {
+                        img {
+                            border-top-right-radius: 0;
+                        }
+                    }
+                }
+            }
+        }
+        &_map {
+            height: 300px;
+        }
+    }
+}

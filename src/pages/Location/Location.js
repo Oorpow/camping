@@ -134,7 +134,8 @@ const Location = () => {
 					<Grid item>
 						<LocationInfo {...locationInfo[1]} />
 					</Grid>
-
+					
+					{/* card */}
 					<Grid item marginTop="30px">
 						<h2>View Our Tents</h2>
 						<div className={styles.location_tents}>

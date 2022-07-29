@@ -4,7 +4,6 @@ import {
 	CardMedia,
 	CardContent,
 	Card,
-	Grid,
 	Typography,
 } from '@mui/material'
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined'

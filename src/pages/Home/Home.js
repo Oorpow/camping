@@ -4,17 +4,18 @@ import styles from './Home.module.less'
 import Works from '../../components/content/Home/Works/Works'
 import LocationItem from '../../components/content/Home/LocationItem/LocationItem'
 import Browse from '../../components/content/Home/Browse/Browse'
+import { Grid } from '@mui/material'
 
 const Home = () => {
 	return (
 		<div className={styles.home}>
 			<Banner />
 			{/* works flow */}
-			<div className={styles.home_container}>
+			<Grid container direction="column" className={styles.home_container}>
 				<Works />
 				<LocationItem />
 				<Browse />
-			</div>
+			</Grid>
 		</div>
 	)
 }

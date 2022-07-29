@@ -2,26 +2,11 @@
   width: 100%;
 }
 .home_container {
-  width: 1100px;
+  width: 1200px;
   margin: auto;
 }
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1536px) {
   .home_container {
-    width: 800px;
-  }
-}
-@media screen and (max-width: 900px) {
-  .home_container {
-    width: 700px;
-  }
-}
-@media screen and (max-width: 768px) {
-  .home_container {
-    width: 500px;
-  }
-}
-@media screen and (max-width: 600px) {
-  .home_container {
-    width: 300px;
+    width: 80%;
   }
 }

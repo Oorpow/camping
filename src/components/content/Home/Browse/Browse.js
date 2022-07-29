@@ -1,7 +1,7 @@
 import React from 'react'
-import { CardActionArea, CardMedia, CardContent, Card, Grid, Typography } from '@mui/material'
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined'
+import { Grid } from '@mui/material'
 import styles from './Browse.module.less'
+import CardItem from '../../../common/CardItem/CardItem'
 
 const Browse = () => {
 	const tentsList = [
@@ -58,41 +58,7 @@ const Browse = () => {
 						className={styles.card}
 						key={item.src}
 					>
-						<Card
-							sx={{
-								maxWidth: 600,
-								boxShadow: '0 0 10px 0 rgb(0 0 0 / 15%)',
-							}}
-							variant="outlined"
-						>
-							<CardActionArea>
-								<CardMedia
-									component="img"
-									height="200"
-									image={item.src}
-									alt={item.title}
-								/>
-								<CardContent>
-									<Typography
-										gutterBottom
-										variant="h6"
-										component="div"
-									>
-										{item.title}
-									</Typography>
-									<div className={styles.guests}>
-										<PersonOutlineOutlinedIcon
-											sx={{ fontSize: 20 }}
-										/>
-										<span>{item.capacity} Guests</span>
-									</div>
-									<div className={styles.price}>
-										<span>${item.price} </span>
-										/night
-									</div>
-								</CardContent>
-							</CardActionArea>
-						</Card>
+						<CardItem {...item} />
 					</Grid>
 				))}
 			</Grid>

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Grid, IconButton, Menu, MenuItem, Tooltip, Avatar } from '@mui/material'
 import FormatAlignCenterIcon from '@mui/icons-material/FormatAlignCenter'
-import DirectionsRunIcon from '@mui/icons-material/DirectionsRun'
 import { NavLink } from 'react-router-dom'
 import router from '../../../router'
 import styles from './Header.module.less'
@@ -44,7 +43,7 @@ const Header = () => {
 
 	return (
 		<div className={styles.header}>
-			<Grid container alignItems="center">
+			<Grid container margin="auto" alignItems="center" className={styles.header_grid}>
 				<Grid item xs={2}>
 					<div>logo</div>
 				</Grid>
@@ -113,7 +112,7 @@ const Header = () => {
 				transformOrigin={{ horizontal: 'right', vertical: 'top' }}
 				anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
 			>
-				{router.slice(0, router.length - 2).map((item) => (
+				{router.slice(1, router.length - 2).map((item) => (
 					<MenuItem key={item.path}>
 						<NavLink to={item.path}>
 							{item.meta && item.meta.title}

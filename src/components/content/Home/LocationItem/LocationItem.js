@@ -1,9 +1,5 @@
 import React, { useState } from 'react'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import CardMedia from '@mui/material/CardMedia'
-import Typography from '@mui/material/Typography'
-import { CardActionArea, Grid } from '@mui/material'
+import { CardActionArea, Grid, Card, CardContent, CardMedia, Typography } from '@mui/material'
 import { Map, Marker, InfoWindow } from 'react-amap'
 import styles from './LocationItem.module.less'
 

@@ -21,6 +21,11 @@
   color: #000;
   font-weight: 500;
 }
+@media screen and (max-width: 900px) {
+  .card_main_img {
+    height: 350px;
+  }
+}
 @media screen and (max-width: 768px) {
   .card_main {
     margin-top: 15px;

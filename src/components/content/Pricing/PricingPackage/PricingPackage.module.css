@@ -1,0 +1,21 @@
+.pricing_container_item_card {
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.06);
+  padding: 50px 0;
+  border-radius: 8px;
+}
+.pricing_container_item_card_img img {
+  width: 75px;
+}
+.pricing_container_item_card_text ul {
+  width: 75%;
+  margin: auto;
+}
+.pricing_container_item_card_text li {
+  text-align: left !important;
+  list-style-type: disc;
+  margin-top: 10px;
+}
+.pricing_container_item_card_text li span {
+  color: #444;
+  font-weight: 400;
+}

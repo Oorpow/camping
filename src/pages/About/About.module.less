@@ -1,0 +1,126 @@
+.about_page {
+    width: 100%;
+    
+    &_banner {
+        height: 400px;
+        position: relative;
+        background: url('https://wecamped.com/wp-content/uploads/2022/04/about_wecamp_new.svg') no-repeat;
+        background-size: cover;
+        background-position: bottom center;
+
+        .about_page_mask {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #fff;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    &_main {
+        width: 80%;
+        margin: 100px auto;
+
+        .about_page_story_main {
+            text-align: center;
+            p {
+                width: 70%;
+                margin: 20px auto;
+                color: #222;
+                font-weight: 400;
+                font-size: 22px;
+            }
+        }
+
+        .about_page_provide {
+            margin-top: 30px;
+            justify-content: center;
+            &_item {
+                display: flex;
+                flex-flow: column wrap;
+                align-items: center;
+                img {
+                    width: 75px;
+                }
+                h4 {
+                    margin-top: 10px;
+                    text-align: center;
+                }
+            }
+        }
+
+        .about_page_card {
+            justify-content: center;
+            &_item {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                box-shadow: 0px 11px 25px 0px rgb(187 187 187 / 50%);
+                height: 320px;
+                padding: 20px;
+                border-radius: 10px;
+    
+                .card_item_img {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    img {
+                        width: 75px;
+                    }
+                    h3 {
+                        margin-top: 10px;
+                    }
+                }
+                .card_item_text {
+                    margin-top: 20px;
+                    p {
+                        line-height: 22px;
+                        text-align: center;
+                        color: #222;
+                        font-weight: 400;
+                        font-size: 16px;
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+@media screen and (max-width: 1536px) {
+    .about_page {
+        &_main {
+            .about_page_provide {
+                justify-content: space-between;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .about_page {
+        &_main {
+            .about_page_provide {
+                justify-content: flex-start;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .about_page {
+        &_main {
+            .about_page_story_main {
+                p {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

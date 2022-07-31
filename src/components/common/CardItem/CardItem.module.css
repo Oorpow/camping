@@ -23,7 +23,7 @@
 }
 @media screen and (max-width: 900px) {
   .card_main_img {
-    height: 350px;
+    height: 300px;
   }
 }
 @media screen and (max-width: 768px) {
@@ -31,11 +31,11 @@
     margin-top: 15px;
   }
   .card_main_img {
-    height: 350px;
+    height: 250px;
   }
 }
 @media screen and (max-width: 600px) {
   .card_main_img {
-    height: 200px;
+    height: 250px;
   }
 }

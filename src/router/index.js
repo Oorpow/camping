@@ -37,14 +37,16 @@ const router = [
 		path: '/login',
 		element: lazy(() => import('../pages/Login/Login')),
 		meta: {
-			title: 'Sign In'
+			title: 'Sign In',
+			noNeed: true
 		}
 	},
 	{
 		path: '/register',
 		element: lazy(() => import('../pages/Register/Register')),
 		meta: {
-			title: 'Sign Up'
+			title: 'Sign Up',
+			noNeed: true
 		}
 	},
 ]

@@ -1,6 +1,6 @@
-import { Grid } from '@mui/material'
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { Grid } from '@mui/material'
 import CardItem from '../../components/common/CardItem/CardItem'
 import LocationInfo from '../../components/content/Location/LocationInfo/LocationInfo'
 import LocationMap from '../../components/content/Location/LocationMap/LocationMap'
@@ -100,11 +100,11 @@ const Location = () => {
 									key={item.id}
 								>
 									{getDataType(item.img) && (
-										<img src={item.img} />
+										<img src={item.img} alt='' />
 									)}
 									{Array.isArray(item.img) &&
 										item.img.map((sub, index) => (
-											<img src={sub.url} key={index} />
+											<img src={sub.url} key={index} alt='' />
 										))}
 								</div>
 							))}

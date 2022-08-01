@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import React from 'react'
+import { NavLink, useLocation, useMatch, useParams } from 'react-router-dom'
 import { Grid } from '@mui/material'
 import CardItem from '../../components/common/CardItem/CardItem'
-import LocationInfo from '../../components/content/Location/LocationInfo/LocationInfo'
-import LocationMap from '../../components/content/Location/LocationMap/LocationMap'
-import LocationPark from '../../components/content/Location/LocationPark/LocationPark'
-import styles from './Location.module.less'
+import styles from './TentPage.module.less'
+import ProductInfo from '../../components/content/TentPage/ProductInfo/ProductInfo'
 
-const Location = () => {
+const TentPage = () => {
+	const location = useLocation()
+	const params = useParams()
+	// console.log(location, params)
+
 	const imgList = [
 		{
 			id: 1,
@@ -41,21 +43,6 @@ const Location = () => {
 		},
 	]
 
-	const locationInfo = [
-		{
-			svgUrl: 'https://wecamped.com/wp-content/uploads/2022/02/paper.svg',
-			content:
-				'Lake Perris itself offers a number of rich activities, including camping, swimming, boating, hiking, horseback riding and cycling, in addition to the nearby Ya-I Heki’ Regional Indian Museum which offers a rich history on the Native American people that once made Lake Perris their home, and displays of local flora and fauna native to the region.',
-			title: 'About This Location',
-		},
-		{
-			svgUrl: 'https://wecamped.com/wp-content/uploads/2022/02/dog.svg',
-			content:
-				'Pets are required to be leashed (6 feet or less), caged, or in vehicle and never left unattended. Pets are not allowed on unpaved trails and on the sand (beach areas) because the water is used for municipal drinking water, and not allowed on Allesandro Island or the Bernasconi Beach area. Pets may go on your boat, but can NOT have any body contact with the water at any time.',
-			title: 'Pet Friendly',
-		},
-	]
-
 	const cardList = [
 		{
 			src: 'https://wecamped.com/wp-content/uploads/2022/03/RON3947-scaled.jpg',
@@ -76,7 +63,6 @@ const Location = () => {
 			price: 200,
 		},
 	]
-
 	const getDataType = (data) => typeof data === 'string'
 
 	return (
@@ -88,11 +74,23 @@ const Location = () => {
 				marginTop="10px"
 				className={styles.location_main}
 			>
-				<h1 className={styles.location_main_lake_title}>Lake Perris Recreation Area</h1>
+
+				
 				{/* 左列 */}
-				<Grid container item xs={10} sm={10} md={10} lg={8} direction="column">
-					{/* lake */}
+				<Grid
+					container
+					item
+					xs={10}
+					sm={10}
+					md={10}
+					lg={8}
+					direction="column"
+				>
+                    {/* product */}
 					<Grid item className={styles.location_lake}>
+						<h1 className={styles.location_main_lake_title}>
+							Lake Perris Recreation Area
+						</h1>
 						<div className={styles.location_lake_imgs}>
 							{imgList.map((item) => (
 								<div
@@ -100,11 +98,15 @@ const Location = () => {
 									key={item.id}
 								>
 									{getDataType(item.img) && (
-										<img src={item.img} alt='' />
+										<img src={item.img} alt="" />
 									)}
 									{Array.isArray(item.img) &&
 										item.img.map((sub, index) => (
-											<img src={sub.url} key={index} alt='' />
+											<img
+												src={sub.url}
+												key={index}
+												alt=""
+											/>
 										))}
 								</div>
 							))}
@@ -114,27 +116,17 @@ const Location = () => {
 							Perris State Recreation Area
 						</h5>
 					</Grid>
-
-					{/* map */}
-					<Grid item className={styles.location_map}>
-						<LocationMap />
-					</Grid>
-
-					{/* park */}
+                    
+                    {/* includes */}
 					<Grid item className={styles.location_park}>
-						<LocationPark />
+						<ProductInfo title="Includes" />
 					</Grid>
 
-					{/* about location */}
-					<Grid item>
-						<LocationInfo {...locationInfo[0]} />
+                    {/* dimensions */}
+                    <Grid item className={styles.location_park}>
+						<ProductInfo title="Dimensions" />
 					</Grid>
 
-					{/* pets */}
-					<Grid item>
-						<LocationInfo {...locationInfo[1]} />
-					</Grid>
-					
 					{/* card */}
 					<Grid item marginTop="30px">
 						<h2>View Our Tents</h2>
@@ -144,7 +136,7 @@ const Location = () => {
 							))}
 						</div>
 					</Grid>
-					
+
 					{/* book in md */}
 					<Grid item className={styles.book_main_lg}>
 						<div className={styles.book_box}>
@@ -157,22 +149,24 @@ const Location = () => {
 							</NavLink>
 						</div>
 					</Grid>
-
 				</Grid>
 
 				{/* 右列 */}
 				<Grid item lg={3.5} className={styles.book_main}>
 					<div className={styles.book_box}>
-						<h4>Ready To Book?</h4>
+                        <div className={styles.book_box_info}>
+                            <span>Person Capacity: 3</span>
+                            <h4>Price Per Night: $230.00</h4>
+                        </div>
+						<h2>Ready To Book?</h2>
 						<NavLink to="/register" className={styles.book_button}>
 							Sign Up Here
 						</NavLink>
 					</div>
 				</Grid>
-
 			</Grid>
 		</div>
 	)
 }
 
-export default Location
+export default TentPage

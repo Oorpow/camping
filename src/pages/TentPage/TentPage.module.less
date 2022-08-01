@@ -29,6 +29,7 @@
     &_main {
         &_lake {
             &_title {
+                text-align: left;
             }
         }
     }
@@ -36,6 +37,16 @@
     .book_main {
         .book_box {
             @signupBox();
+            &_info {
+                margin-bottom: 10px;
+                span {
+                    color: #444444;
+                    font-weight: 400;
+                }
+                h4 {
+                    font-weight: 500;
+                }
+            }
     
             .book_button {
                 @signupButton();
@@ -99,15 +110,6 @@
         }
     }
 
-    &_map {
-        margin-top: 30px !important;
-        height: 350px;
-
-        h2 {
-            margin-bottom: 15px;
-        }
-    }
-
     &_park {
         margin-top: 80px !important;
     }
@@ -153,7 +155,7 @@
 @media screen and (max-width: 600px) {
     .location {
         .location_main_lake_title {
-            font-size: 30px;
+            font-size: 25px;
         }
         &_lake {
             &_imgs {

@@ -2,6 +2,9 @@
   width: 1100px;
   margin: auto;
 }
+.location_main_lake_title {
+  text-align: left;
+}
 .location .book_main .book_box {
   display: flex;
   flex-flow: column wrap;
@@ -12,6 +15,16 @@
   padding: 20px 0;
   position: sticky;
   top: 10px;
+}
+.location .book_main .book_box_info {
+  margin-bottom: 10px;
+}
+.location .book_main .book_box_info span {
+  color: #444444;
+  font-weight: 400;
+}
+.location .book_main .book_box_info h4 {
+  font-weight: 500;
 }
 .location .book_main .book_box .book_button {
   width: 90%;
@@ -79,13 +92,6 @@
   font-style: italic;
   color: #444444;
 }
-.location_map {
-  margin-top: 30px !important;
-  height: 350px;
-}
-.location_map h2 {
-  margin-bottom: 15px;
-}
 .location_park {
   margin-top: 80px !important;
 }
@@ -115,7 +121,7 @@
 }
 @media screen and (max-width: 600px) {
   .location .location_main_lake_title {
-    font-size: 30px;
+    font-size: 25px;
   }
   .location_lake_imgs {
     flex-wrap: wrap;

@@ -23,6 +23,24 @@ const router = [
 				],
 			},
 			{
+				path: 'account',
+				element: lazy(() => import('../pages/Account/Account')),
+				children: [
+					{
+						path: 'order',
+						element: lazy(() => import('../components/content/Account/Order/Order'))
+					},
+					{
+						path: 'edit-account',
+						element: lazy(() => import('../components/content/Account/AccountInfo/AccountInfo'))
+					},
+					{
+						path: 'edit-address',
+						element: lazy(() => import('../components/content/Account/Address/Address'))
+					}
+				]
+			},
+			{
 				path: '/home',
 				element: lazy(() => import('../pages/Home/Home')),
 				meta: {
@@ -56,7 +74,7 @@ const router = [
 				meta: {
 					title: 'About',
 				},
-			},
+			}
 		],
 	},
 	{

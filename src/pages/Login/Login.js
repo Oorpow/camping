@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useState } from 'react'
 import {
 	Avatar,
 	Button,
@@ -10,10 +10,12 @@ import {
 	Box,
 	Grid,
 	Typography,
-    Checkbox
 } from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { userLogin } from '../../api/user'
+import AlertBar from '../../components/common/AlertBar/AlertBar'
 
 function Copyright(props) {
 	return (
@@ -23,10 +25,10 @@ function Copyright(props) {
 			align="center"
 			{...props}
 		>
-			{'Copyright © '}
-			<Link color="inherit" href="https://mui.com/">
-				Your Website
-			</Link>{' '}
+			{'Copyright © Oorpow '}
+			{/* <Link color="inherit" href="https://mui.com/">
+				Oorpow
+			</Link>{' '} */}
 			{new Date().getFullYear()}
 			{'.'}
 		</Typography>
@@ -36,19 +38,45 @@ function Copyright(props) {
 const theme = createTheme()
 
 export default function Login() {
-	const handleSubmit = (event) => {
+	const [showAlertType, setShowAlertType] = useState({
+		open: false,
+		type: 'success',
+		message: '',
+	})
+
+	let navigate = useNavigate()
+
+	// 提交登录信息
+	const handleSubmit = async (event) => {
 		event.preventDefault()
 		const data = new FormData(event.currentTarget)
-		console.log({
+		// 登录
+		let res = await userLogin({
 			email: data.get('email'),
 			password: data.get('password'),
 		})
+		if (res.data.status !== 200) {
+			setShowAlertType({
+				open: true,
+				type: 'error',
+				message: 'login failed, check your email or password',
+			})
+		} else {
+			setShowAlertType({
+				open: true,
+				type: 'success',
+				message: 'login successfully',
+			})
+			navigate('/home', { replace: true })
+		}
 	}
 
 	return (
 		<ThemeProvider theme={theme}>
+			<AlertBar {...showAlertType} />
 			<Grid container component="main" sx={{ height: '100vh' }}>
 				<CssBaseline />
+				{/* background image */}
 				<Grid
 					item
 					xs={false}
@@ -66,6 +94,7 @@ export default function Login() {
 						backgroundPosition: 'center',
 					}}
 				/>
+
 				<Grid
 					item
 					xs={12}
@@ -90,6 +119,7 @@ export default function Login() {
 						<Typography component="h1" variant="h5">
 							Sign in
 						</Typography>
+						{/* form */}
 						<Box
 							component="form"
 							noValidate
@@ -100,7 +130,6 @@ export default function Login() {
 								margin="normal"
 								required
 								fullWidth
-								id="email"
 								label="Email Address"
 								name="email"
 								autoComplete="email"
@@ -113,17 +142,7 @@ export default function Login() {
 								name="password"
 								label="Password"
 								type="password"
-								id="password"
 								autoComplete="current-password"
-							/>
-							<FormControlLabel
-								control={
-									<Checkbox
-										value="remember"
-										color="primary"
-									/>
-								}
-								label="Remember me"
 							/>
 							<Button
 								type="submit"
@@ -134,15 +153,13 @@ export default function Login() {
 								Sign In
 							</Button>
 							<Grid container>
-								<Grid item xs>
-									<Link href="#" variant="body2">
-										Forgot password?
-									</Link>
-								</Grid>
 								<Grid item>
-									<Link href="#" variant="body2">
+									<NavLink to="/register">
 										{"Don't have an account? Sign Up"}
-									</Link>
+									</NavLink>
+									{/* <Link href="#" variant="body2">
+										{"Don't have an account? Sign Up"}
+									</Link> */}
 								</Grid>
 							</Grid>
 							<Copyright sx={{ mt: 5 }} />

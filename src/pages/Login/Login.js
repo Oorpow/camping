@@ -4,8 +4,6 @@ import {
 	Button,
 	CssBaseline,
 	TextField,
-	FormControlLabel,
-	Link,
 	Paper,
 	Box,
 	Grid,
@@ -14,8 +12,10 @@ import {
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { userLogin } from '../../api/user'
 import AlertBar from '../../components/common/AlertBar/AlertBar'
+import { useLoginMutation } from '../../store/reducers/userReducers'
+import { useDispatch } from 'react-redux'
+import { setUserInfo } from '../../store/reducers/accessReducers'
 
 function Copyright(props) {
 	return (
@@ -43,31 +43,42 @@ export default function Login() {
 		type: 'success',
 		message: '',
 	})
-
-	let navigate = useNavigate()
+	const navigate = useNavigate()
+	const [login, _] = useLoginMutation()
+	const dispatch = useDispatch()
 
 	// 提交登录信息
 	const handleSubmit = async (event) => {
 		event.preventDefault()
 		const data = new FormData(event.currentTarget)
-		// 登录
-		let res = await userLogin({
-			email: data.get('email'),
-			password: data.get('password'),
-		})
-		if (res.data.status !== 200) {
+		try {
+			// 登录
+			const result = await login({
+				email: data.get('email'),
+				password: data.get('password'),
+			})
+			if (result.data.status === 200) {
+				// 状态持久化
+				dispatch(
+					setUserInfo({
+						token: result.data.token,
+						info: result.data.data,
+					})
+				)
+				navigate('/home', { replace: true })
+			} else {
+				setShowAlertType({
+					open: true,
+					type: 'error',
+					message: 'login failed, check your email or password',
+				})
+			}
+		} catch (error) {
 			setShowAlertType({
 				open: true,
 				type: 'error',
-				message: 'login failed, check your email or password',
+				message: error,
 			})
-		} else {
-			setShowAlertType({
-				open: true,
-				type: 'success',
-				message: 'login successfully',
-			})
-			navigate('/home', { replace: true })
 		}
 	}
 

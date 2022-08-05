@@ -1,4 +1,5 @@
 import axios from 'axios'
+import store from '../store'
 
 const request = axios.create({
     baseURL: 'http://localhost:5005/api',
@@ -6,6 +7,10 @@ const request = axios.create({
 })
 
 request.interceptors.request.use(config => {
+    const globalState = store.getState()
+    if (globalState.access.isLogged) {
+        config.headers['Authorization'] = globalState.access.token
+    }
     return config
 }, err => {
     return Promise.reject(err)
@@ -14,7 +19,6 @@ request.interceptors.request.use(config => {
 request.interceptors.response.use(res => {
     return res
 }, err => {
-    console.log(err)
     return Promise.reject(err)
 })
 

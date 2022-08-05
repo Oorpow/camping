@@ -1,5 +1,5 @@
 .work_item {
-  margin-top: 10px;
+  margin-top: 10px !important;
   text-align: center;
   border: 1px solid #DDDDDD73;
   border-radius: 6px;

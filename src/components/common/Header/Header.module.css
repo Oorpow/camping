@@ -38,6 +38,10 @@
 .header_toggle {
   display: none!important;
 }
+.header_toggle ul {
+  display: flex;
+  align-items: center;
+}
 @media screen and (max-width: 1536px) {
   .header .header_grid {
     width: 80%;

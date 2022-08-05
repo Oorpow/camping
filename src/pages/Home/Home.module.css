@@ -2,11 +2,11 @@
   width: 100%;
 }
 .home_container {
-  width: 1200px;
+  width: 1200px !important;
   margin: auto;
 }
 @media screen and (max-width: 1536px) {
   .home_container {
-    width: 80%;
+    width: 80% !important;
   }
 }

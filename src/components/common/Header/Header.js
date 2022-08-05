@@ -1,9 +1,16 @@
 import React from 'react'
-import { Grid, IconButton, Menu, MenuItem, Tooltip, Avatar } from '@mui/material'
+import {
+	Grid,
+	IconButton,
+	Menu,
+	MenuItem,
+	Avatar,
+} from '@mui/material'
 import FormatAlignCenterIcon from '@mui/icons-material/FormatAlignCenter'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import router from '../../../router'
 import styles from './Header.module.less'
+import { useSelector } from 'react-redux'
 
 const Header = () => {
 	const [anchorEl, setAnchorEl] = React.useState(null)
@@ -40,13 +47,55 @@ const Header = () => {
 	const handleClose = () => {
 		setAnchorEl(null)
 	}
+	
+	// 导航至 account 页
+	const navigate = useNavigate()
+	const navToAccount = () => {
+		navigate('account')
+	}
+
+	const store = useSelector((state) => state.access)
+
+	// 已登录显示用户头像，未登录显示另一组件
+	const whenLogin = () => {
+		if (store.isLogged) {
+			return (
+				<li>
+					<IconButton onClick={navToAccount}>
+						<Avatar>{store.info?.firstName}</Avatar>
+					</IconButton>
+				</li>
+			)
+		} else {
+			return (
+				<>
+					<li>
+						<NavLink to="/login" style={{ color: '#335D65' }}>
+							Sign In
+						</NavLink>
+					</li>
+					<li>
+						<NavLink to="/register" className={styles.register}>
+							Sign Up
+						</NavLink>
+					</li>
+				</>
+			)
+		}
+	}
 
 	return (
 		<div className={styles.header}>
-			<Grid container margin="auto" alignItems="center" className={styles.header_grid}>
+			<Grid
+				container
+				margin="auto"
+				alignItems="center"
+				className={styles.header_grid}
+			>
 				<Grid item xs={2}>
 					<div>logo</div>
 				</Grid>
+				{/* 大屏分辨率 */}
 				<Grid item md={10} className={styles.header_nav_main}>
 					<nav>
 						<ul>
@@ -64,42 +113,41 @@ const Header = () => {
 									</NavLink>
 								</li>
 							))}
-							<li>
-								<NavLink
-									to="/login"
-									style={{ color: '#335D65' }}
-								>
-									Sign In
-								</NavLink>
-							</li>
-							<li>
-								<NavLink
-									to="/register"
-									className={styles.register}
-								>
-									Sign Up
-								</NavLink>
-							</li>
+							{whenLogin()}
 						</ul>
 					</nav>
 				</Grid>
-				<Grid container item xs={10} direction="row-reverse" className={styles.header_toggle}>
-					<Tooltip title="">
-						<IconButton
-							onClick={handleClick}
-							size="small"
-							sx={{ ml: 2 }}
-							aria-controls={open ? 'account-menu' : undefined}
-							aria-haspopup="true"
-							aria-expanded={open ? 'true' : undefined}
-						>
-							<FormatAlignCenterIcon sx={{ color: '#335D65' }} />
-						</IconButton>
-					</Tooltip>
-					<IconButton aria-label="delete">
-						<Avatar />
-						{/* <DirectionsRunIcon /> */}
-					</IconButton>
+				{/* 平板分辨率下显示 */}
+				<Grid
+					container
+					item
+					xs={10}
+					direction="row-reverse"
+					className={styles.header_toggle}
+				>
+					<ul>
+						<li>
+							<IconButton onClick={navToAccount}>
+								<Avatar>{store.info?.firstName}</Avatar>
+							</IconButton>
+						</li>
+						<li>
+							<IconButton
+								onClick={handleClick}
+								size="large"
+								sx={{ ml: 2 }}
+								aria-controls={
+									open ? 'account-menu' : undefined
+								}
+								aria-haspopup="true"
+								aria-expanded={open ? 'true' : undefined}
+							>
+								<FormatAlignCenterIcon
+									sx={{ color: '#335D65' }}
+								/>
+							</IconButton>
+						</li>
+					</ul>
 				</Grid>
 			</Grid>
 			<Menu

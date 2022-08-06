@@ -19,6 +19,7 @@ export const accessSlice = createSlice({
             state.isLogged = false
             state.token = ''
             state.info = null
+            localStorage.removeItem('persist:access')
         }
     }
 })

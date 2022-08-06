@@ -6,7 +6,7 @@
 .footer_background {
   width: 100%;
   height: 650px;
-  background: url('https://wecamped.com/wp-content/uploads/2022/02/footer_background_wecamped.svg') no-repeat;
+  background: url('http://localhost:5005/images/footer/footer_background.svg') no-repeat;
   background-size: cover;
   background-position: center center;
 }

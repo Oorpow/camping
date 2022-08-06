@@ -2,18 +2,18 @@ import React from 'react'
 import styles from './PricingCardItem.module.less'
 
 const PricingCardItem = (props) => {
-    const { url, title, price } = props
+    const { src, bigTitle, smallTitle } = props
 
 	return (
 		<div className={styles.pricing_container_item_card}>
 			<div className={styles.pricing_container_item_card_img}>
-				<img src={url} alt={title} />
+				<img src={process.env.REACT_APP_DEV_URL + src} alt={bigTitle} />
 			</div>
 			<div className={styles.pricing_container_item_card_text}>
 				<h4>
-					{title}
+					{bigTitle}
 					<br />
-					<span>{price}</span>
+					<span>{smallTitle}</span>
 				</h4>
 			</div>
 		</div>

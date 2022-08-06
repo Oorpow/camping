@@ -56,7 +56,7 @@ const LocationItem = () => {
 							<CardMedia
 								component="img"
 								height="300"
-								image="https://wecamped.com/wp-content/uploads/2022/03/60df74d90e13638867df8c7d_5cb0840c-2714-4e7d-918a-02ec00cc5540-1536x1023.jpeg"
+								image={process.env.REACT_APP_DEV_URL + '/images/home/location/locationImg.jpeg'}
 								alt="green iguana"
 							/>
 							<CardContent>

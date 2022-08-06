@@ -2,19 +2,19 @@ import React from 'react'
 import styles from './PricingPackage.module.less'
 
 const PricingPackage = (props) => {
-	const { img, title, list } = props
+	const { src, title, list } = props
 
 	return (
 		<div className={styles.pricing_container_item_card}>
 			<div className={styles.pricing_container_item_card_img}>
-				<img src={img} alt={title} />
+				<img src={process.env.REACT_APP_DEV_URL + src} alt={title} />
 			</div>
 			<div className={styles.pricing_container_item_card_text}>
 				<h2>{title}</h2>
 				<ul>
 					{list.map((item, i) => (
-						<li key={i}>
-							<span>{item}</span>
+						<li key={item._id}>
+							<span>{item.content}</span>
 						</li>
 					))}
 				</ul>

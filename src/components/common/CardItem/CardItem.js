@@ -23,7 +23,7 @@ const CardItem = (props) => {
 			<CardActionArea>
 				<CardMedia
 					component="img"
-					image={src}
+					image={process.env.REACT_APP_DEV_URL + src}
 					alt={title}
 					className={styles.card_main_img}
 				/>

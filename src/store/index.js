@@ -1,7 +1,4 @@
-import {
-	configureStore,
-	getDefaultMiddleware,
-} from '@reduxjs/toolkit'
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 import {
 	persistReducer,
 	FLUSH,
@@ -17,24 +14,32 @@ import loadingSlice from './reducers/loadingReducer'
 import userApi from './reducers/userReducers'
 import { accessSlice } from './reducers/accessReducers'
 import flowsApi from './reducers/flowsReducer'
+import tentsApi from './reducers/tentsReducers'
+import pricingApi from './reducers/pricingReducers'
 
 const accessPersistConfig = {
 	key: 'access',
-	storage: storage
+	storage: storage,
 }
 
 const store = configureStore({
 	reducer: {
 		[userApi.reducerPath]: userApi.reducer,
 		[flowsApi.reducerPath]: flowsApi.reducer,
-		access: persistReducer(accessPersistConfig, accessSlice.reducer)
+		[tentsApi.reducerPath]: tentsApi.reducer,
+		[pricingApi.reducerPath]: pricingApi.reducer,
+		access: persistReducer(accessPersistConfig, accessSlice.reducer),
 	},
-	middleware: getDefaultMiddleware({
-		serializableCheck: {
-			/* ignore persistance actions */
-			ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-		},
-	})
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware({
+			serializableCheck: {
+				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+			}
+		})
+			.concat(userApi.middleware)
+			.concat(flowsApi.middleware)
+			.concat(tentsApi.middleware)
+			.concat(pricingApi.middleware)
 })
 
 setupListeners(store.dispatch)

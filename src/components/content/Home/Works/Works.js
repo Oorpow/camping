@@ -11,7 +11,9 @@ const WorkItem = () => {
 			{isLoading
 				? Array.from(new Array(3)).map((_, i) => (
 						<Grid item p={3} xs={12} md={3.5} xl={3.5} key={i}>
-							<Skeleton variant="rectangular" height="300px" />
+							<Skeleton variant="rectangular" height="200px" />
+							<Skeleton />
+							<Skeleton width="60%" />
 						</Grid>
 				  ))
 				: data.data.map((item, i) => (

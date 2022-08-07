@@ -1,23 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import './App.css'
-import Loading from './components/common/Loading/Loading'
-import { useSelector } from 'react-redux'
-import SyncRouter from './router/routeList'
+import { setRouteBefore, transformRoutes } from '../src/router/guard/guardFn'
+import router, { onRouteBefore } from './router'
+import { useRoutes } from 'react-router'
 
 function App() {
-	const isLoading = useSelector((state) => state.loading)
-	// const [load, setLoad] = useState(isLoading)
+	setRouteBefore(onRouteBefore)
+	const elements = useRoutes(transformRoutes(router))
 
-	// useEffect(() => {
-	// 	setLoad(isLoading)
-	// }, [isLoading])
-
-	return (
-		<>
-			<SyncRouter />
-			{/* {load && <Loading />} */}
-		</>
-	)
+	return elements
 }
 
 export default App

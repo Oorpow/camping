@@ -16,6 +16,7 @@ import { accessSlice } from './reducers/accessReducers'
 import flowsApi from './reducers/flowsReducer'
 import tentsApi from './reducers/tentsReducers'
 import pricingApi from './reducers/pricingReducers'
+import locationApi from './reducers/locationReducers'
 
 const accessPersistConfig = {
 	key: 'access',
@@ -28,6 +29,7 @@ const store = configureStore({
 		[flowsApi.reducerPath]: flowsApi.reducer,
 		[tentsApi.reducerPath]: tentsApi.reducer,
 		[pricingApi.reducerPath]: pricingApi.reducer,
+		[locationApi.reducerPath]: locationApi.reducer,
 		access: persistReducer(accessPersistConfig, accessSlice.reducer),
 	},
 	middleware: (getDefaultMiddleware) =>
@@ -40,6 +42,7 @@ const store = configureStore({
 			.concat(flowsApi.middleware)
 			.concat(tentsApi.middleware)
 			.concat(pricingApi.middleware)
+			.concat(locationApi.middleware)
 })
 
 setupListeners(store.dispatch)

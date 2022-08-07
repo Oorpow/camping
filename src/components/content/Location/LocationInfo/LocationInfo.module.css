@@ -4,12 +4,6 @@
 .location_info_head {
   display: flex;
 }
-.location_info_head img {
-  width: 30px;
-}
-.location_info_head h2 {
-  margin-left: 10px;
-}
 .location_info_content {
   margin-top: 10px;
 }

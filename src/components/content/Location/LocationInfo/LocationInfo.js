@@ -2,19 +2,18 @@ import React from 'react'
 import styles from './LocationInfo.module.less'
 
 const LocationInfo = (props) => {
-	const { svgUrl, content, title } = props
+	const { locateInfo } = props
 
-	return (
-		<div className={styles.location_info}>
+	return locateInfo.map((item) => (
+		<div className={styles.location_info} key={item._id}>
 			<div className={styles.location_info_head}>
-				<img src={svgUrl} alt={title} />
-				<h2>{title}</h2>
+				<h2>{item.title}</h2>
 			</div>
 			<div className={styles.location_info_content}>
-				<p>{content}</p>
+				<p>{item.content}</p>
 			</div>
 		</div>
-	)
+	))
 }
 
 export default LocationInfo

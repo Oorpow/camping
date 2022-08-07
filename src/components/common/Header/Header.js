@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux'
 
 const Header = () => {
 	const [anchorEl, setAnchorEl] = React.useState(null)
+	console.log(router)
 	const open = Boolean(anchorEl)
 	const menuProps = {
 		elevation: 0,
@@ -99,7 +100,7 @@ const Header = () => {
 				<Grid item md={10} className={styles.header_nav_main}>
 					<nav>
 						<ul>
-							{router[0].children.slice(2).map((item) => (
+							{router[1].children.slice(3).map((item) => (
 								<li key={item.path}>
 									<NavLink
 										to={item.path}
@@ -160,7 +161,7 @@ const Header = () => {
 				transformOrigin={{ horizontal: 'right', vertical: 'top' }}
 				anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
 			>
-				{router[0].children.slice(2).map((item) => (
+				{router[1].children.slice(2).map((item) => (
 					<MenuItem key={item.path}>
 						<NavLink to={item.path}>
 							{item.meta && item.meta.title}

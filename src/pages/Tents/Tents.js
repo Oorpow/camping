@@ -15,7 +15,7 @@ const Tents = () => {
 			</div>
 			{/* card */}
 			<div className={styles.tents_main}>
-				<Grid container className={styles.tents_main_grid}>
+				<Grid container className={styles.tents_main_grid} columnSpacing={1}>
 					{isLoading
 						? Array.from(new Array(5)).map((_, i) => (
 								<Grid

@@ -7,9 +7,9 @@ const locationApi = createApi({
     endpoints(build) {
         return {
             getLocationInfo: build.query({
-                query(areaType) {
+                query() {
                     return {
-                        url: `/location/${areaType}`
+                        url: '/location'
                     }
                 }
             })

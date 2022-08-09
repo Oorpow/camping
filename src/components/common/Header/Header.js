@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux'
 
 const Header = () => {
 	const [anchorEl, setAnchorEl] = React.useState(null)
-	console.log(router)
+	
 	const open = Boolean(anchorEl)
 	const menuProps = {
 		elevation: 0,

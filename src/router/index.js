@@ -23,7 +23,7 @@ const router = [
 				children: [
 					{
 						path: ':name',
-						component: () => import('../pages/TentPage/TentPage'),
+						component: () => import('../pages/ProductDetail/ProductDetail'),
 					},
 				],
 			},

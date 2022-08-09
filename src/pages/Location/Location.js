@@ -10,7 +10,7 @@ import { useGetLocationInfoQuery } from '../../store/reducers/locationReducers'
 import { useGetTentsQuery } from '../../store/reducers/tentsReducers'
 
 const Location = () => {
-	const { data, isSuccess } = useGetLocationInfoQuery("default")
+	const { data, isSuccess } = useGetLocationInfoQuery()
 	const tentQuery = useGetTentsQuery()
 	const [areaImgs, setAreaImgs] = useState([])
 
@@ -149,17 +149,32 @@ const Location = () => {
 					</Grid>
 
 					{/* card */}
-					<Grid item marginTop="30px">
+					<Grid
+						container
+						item
+						direction="column"
+						marginTop="30px"
+					>
 						<h2>View Our Tents</h2>
-						<div className={styles.location_tents}>
+						<Grid container item columnSpacing={1}>
 							{tentQuery.isSuccess
 								? tentQuery.data.data
 										.slice(0, 3)
 										.map((item) => (
-											<CardItem
-												key={item._id}
-												{...item}
-											/>
+											<Grid
+												item
+												xs={12}
+												sm={6}
+												md={4}
+												xl={4}
+												marginTop="20px"
+												key={item.src}
+											>
+												<CardItem
+													key={item._id}
+													{...item}
+												/>
+											</Grid>
 										))
 								: Array.from(new Array(3)).map((_, i) => (
 										<div
@@ -177,7 +192,7 @@ const Location = () => {
 											<Skeleton width="60%" />
 										</div>
 								  ))}
-						</div>
+						</Grid>
 					</Grid>
 
 					{/* book in md */}

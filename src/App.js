@@ -1,4 +1,3 @@
-import React from 'react'
 import './App.css'
 import { setRouteBefore, transformRoutes } from '../src/router/guard/guardFn'
 import router, { onRouteBefore } from './router'

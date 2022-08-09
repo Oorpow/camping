@@ -8,9 +8,16 @@ import {
 } from '@mui/material'
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined'
 import styles from './CardItem.module.less'
+import { useNavigate } from 'react-router'
 
 const CardItem = (props) => {
 	const { src, title, price, capacity } = props
+
+	const navigate = useNavigate()
+
+	const handleNavToDetail = (title) => {
+		navigate(`/product/${title}`)
+	}
 
 	return (
 		<Card
@@ -20,7 +27,7 @@ const CardItem = (props) => {
 			variant="outlined"
 			className={styles.card_main}
 		>
-			<CardActionArea>
+			<CardActionArea onClick={() => handleNavToDetail(title)}>
 				<CardMedia
 					component="img"
 					image={process.env.REACT_APP_DEV_URL + src}

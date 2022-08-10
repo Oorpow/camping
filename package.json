@@ -54,6 +54,7 @@
     "react-amap": "^1.2.8",
     "react-app-polyfill": "^3.0.0",
     "react-area-linkage": "^3.0.0",
+    "react-date-range": "^1.4.0",
     "react-dev-utils": "^12.0.1",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",

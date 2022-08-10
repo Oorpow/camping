@@ -1,0 +1,21 @@
+.date {
+  width: 100%;
+}
+.date :global(.rdrMonth) {
+  width: 39.667em;
+}
+.date :global(.rdrStartEdge) {
+  color: #047469 !important;
+}
+.date :global(.rdrInRange) {
+  color: #047469 !important;
+}
+.date :global(.rdrEndEdge) {
+  color: #047469 !important;
+}
+.date :global(.rdrDayToday .rdrDayNumber span:after) {
+  background: #EF9000 !important;
+}
+.date :global(.rdrDay:hover) {
+  color: #047469 !important;
+}

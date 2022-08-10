@@ -1,7 +1,7 @@
+import React from 'react'
 import { Grid, Typography, Skeleton } from '@mui/material'
 import { Carousel, Image } from 'antd'
-import React from 'react'
-import { useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import CardItem from '../../components/common/CardItem/CardItem'
 import { useGetProductByTypeQuery } from '../../store/reducers/productReducers'
 import { useGetTentsQuery } from '../../store/reducers/tentsReducers'
@@ -11,6 +11,12 @@ const ProductDetail = () => {
 	const { name } = useParams()
 	const { data, isSuccess, isLoading } = useGetProductByTypeQuery(name)
 	const tentData = useGetTentsQuery()
+	const navigate = useNavigate()
+
+	// 跳转至预订页
+	const handleNavToBook = () => {
+		navigate('/order')
+	}
 
 	return (
 		<div className={styles.detail_page}>
@@ -120,7 +126,7 @@ const ProductDetail = () => {
 						</Grid>
 						{/* 按钮 */}
 						<div className={styles.book_btn}>
-							<div className={styles.book_btn_inner}>
+							<div className={styles.book_btn_inner} onClick={handleNavToBook}>
 								<span>start booking</span>
 								<div className={styles.book_btn_inner_arrow}>
 									<img

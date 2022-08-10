@@ -66,6 +66,13 @@ const router = [
 					title: 'About',
 				},
 			},
+			{
+				path: 'order',
+				component: () => import('../pages/Order/Order'),
+				meta: {
+					title: 'Order'
+				}
+			}
 		],
 	},
 	{

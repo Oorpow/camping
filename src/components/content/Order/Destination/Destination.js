@@ -7,13 +7,16 @@ import {
 	Grid,
 	Typography,
 } from '@mui/material'
+import { useDispatch, useSelector } from 'react-redux'
+import { setLocation } from '../../../../store/reducers/orderReducers'
 
 const Destination = () => {
 	const [value, setValue] = useState('Lake')
+	const dispatch = useDispatch()
 
 	const handleChange = (event) => {
-        console.log(event.target.value)
 		setValue(event.target.value)
+		dispatch(setLocation(event.target.value))
 	}
 
 	return (

@@ -18,6 +18,7 @@ import tentsApi from './reducers/tentsReducers'
 import pricingApi from './reducers/pricingReducers'
 import locationApi from './reducers/locationReducers'
 import productApi from './reducers/productReducers'
+import orderReducers from './reducers/orderReducers'
 
 const accessPersistConfig = {
 	key: 'access',
@@ -32,6 +33,7 @@ const store = configureStore({
 		[pricingApi.reducerPath]: pricingApi.reducer,
 		[locationApi.reducerPath]: locationApi.reducer,
 		[productApi.reducerPath]: productApi.reducer,
+		order: orderReducers,
 		access: persistReducer(accessPersistConfig, accessSlice.reducer),
 	},
 	middleware: (getDefaultMiddleware) =>

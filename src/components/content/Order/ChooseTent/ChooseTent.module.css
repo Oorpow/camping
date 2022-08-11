@@ -1,0 +1,26 @@
+.tent_item_img {
+  height: 145px;
+}
+.tent_item_img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.tent_item_stepper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+.tent_item_stepper span {
+  font-size: 18px;
+}
+.tent_item_detail {
+  margin-top: 5px;
+}
+.tent_item_detail span {
+  color: #335d65;
+  font-weight: 400;
+}

@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Grid, Typography } from '@mui/material'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import DeckOutlinedIcon from '@mui/icons-material/DeckOutlined'
 import NearMeOutlinedIcon from '@mui/icons-material/NearMeOutlined'
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined'
 import styles from './OrderReview.module.less'
+import { useSelector } from 'react-redux'
 
-const Locate = () => {
+const Locate = (props) => {
+	const { location } = props
+
 	return (
 		<Grid container item direction="column">
 			<Grid item>
@@ -24,7 +27,7 @@ const Locate = () => {
 						component="div"
 						color="#047469"
 					>
-						Lake Park
+						{location}
 					</Typography>
 					<CheckCircleIcon fontSize="small" color="success" />
 				</div>
@@ -33,7 +36,9 @@ const Locate = () => {
 	)
 }
 
-const SomeTent = () => {
+const SomeTent = (props) => {
+	const { tentList, totalDate } = props
+
 	return (
 		<Grid container item direction="column" margin="20px 0">
 			<Grid item>
@@ -44,34 +49,60 @@ const SomeTent = () => {
 					</Typography>
 				</div>
 			</Grid>
-			<Grid item>
-				<div
-					style={{
-						display: 'flex',
-						alignItems: 'center',
-						justifyContent: 'space-between',
-					}}
-				>
-					<Typography variant="subtitle2">
-						Lake Park *{' '}
-						<span style={{ color: '#047469', fontWeight: '500' }}>
-							3
-						</span>
-					</Typography>
-					<Typography
-						variant="subtitle1"
-						color="#047469"
-						fontWeight="500"
+			{tentList.length > 0 ? (
+				tentList.map((item) => (
+					<Grid item key={item._id}>
+						<div
+							style={{
+								display: 'flex',
+								alignItems: 'center',
+								justifyContent: 'space-between',
+							}}
+						>
+							<Typography variant="subtitle2">
+								{item.title} *{' '}
+								<span
+									style={{
+										color: '#047469',
+										fontWeight: '500',
+									}}
+								>
+									{item.num}
+								</span>
+							</Typography>
+							<Typography
+								variant="subtitle1"
+								color="#047469"
+								fontWeight="500"
+							>
+								$ {item.price * totalDate}
+							</Typography>
+						</div>
+					</Grid>
+				))
+			) : (
+				<Grid item>
+					<div
+						style={{
+							display: 'flex',
+							alignItems: 'center',
+							justifyContent: 'space-between',
+						}}
 					>
-						$2000
-					</Typography>
-				</div>
-			</Grid>
+						<Typography variant="subtitle2">
+							It seems you don't book any tent, please choose a
+							tent first!
+						</Typography>
+					</div>
+				</Grid>
+			)}
 		</Grid>
 	)
 }
 
-const Duration = () => {
+const Duration = (props) => {
+	const { bookDates } = props
+
 	return (
 		<Grid container item direction="column">
 			<Grid item>
@@ -82,8 +113,8 @@ const Duration = () => {
 					</Typography>
 				</div>
 			</Grid>
-			<Grid item>
-				<div>
+			<Grid container item direction="column" rowSpacing={1}>
+				<Grid item>
 					<Typography variant="subtitle2" component="div">
 						Start Date
 					</Typography>
@@ -93,10 +124,10 @@ const Duration = () => {
 						color="#047469"
 						fontWeight="500"
 					>
-						2022-08-17
+						{bookDates.startDate || 'please choose the start date'}
 					</Typography>
-				</div>
-				<div>
+				</Grid>
+				<Grid item>
 					<Typography variant="subtitle2" component="div">
 						End Date
 					</Typography>
@@ -106,10 +137,10 @@ const Duration = () => {
 						color="#047469"
 						fontWeight="500"
 					>
-						2022-08-24
+						{bookDates.endDate || 'please choose the end date'}
 					</Typography>
-				</div>
-				<div>
+				</Grid>
+				<Grid item>
 					<Typography variant="subtitle2" component="div">
 						Total Days
 					</Typography>
@@ -119,15 +150,17 @@ const Duration = () => {
 						color="#047469"
 						fontWeight="500"
 					>
-						6
+						{bookDates.totalDate || 'You need to book the date'}
 					</Typography>
-				</div>
+				</Grid>
 			</Grid>
 		</Grid>
 	)
 }
 
 const OrderReview = () => {
+	const orderState = useSelector((state) => state.order)
+
 	return (
 		<Grid container item direction="column" p={2}>
 			<Grid item>
@@ -139,9 +172,12 @@ const OrderReview = () => {
 				</Typography>
 			</Grid>
 			<Grid container item direction="column" marginTop="10px">
-				<Locate />
-				<SomeTent />
-				<Duration />
+				<Locate location={orderState.location} />
+				<SomeTent
+					tentList={orderState.tent}
+					totalDate={orderState.duration.totalDate}
+				/>
+				<Duration bookDates={orderState.duration} />
 			</Grid>
 		</Grid>
 	)

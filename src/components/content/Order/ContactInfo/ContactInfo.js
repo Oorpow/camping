@@ -9,18 +9,22 @@ import {
 	Container,
 } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { setContactInfo } from '../../../../store/reducers/orderReducers'
+import { useDispatch, useSelector } from 'react-redux'
 
 const theme = createTheme()
 
 const ContactInfo = () => {
+	const dispatch = useDispatch()
+
 	const handleSubmit = (event) => {
 		event.preventDefault()
 		const data = new FormData(event.currentTarget)
-		console.log({
-            firstName: data.get('firstName'),
+		dispatch(setContactInfo({
+			firstName: data.get('firstName'),
             lastName: data.get('lastName'),
             email: data.get('email')
-        })
+		}))
 	}
 
 	return (

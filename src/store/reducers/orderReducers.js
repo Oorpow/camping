@@ -9,6 +9,7 @@ const orderSlice = createSlice({
 			duration: {
 				startDate: '',
 				endDate: '',
+				totalDate: ''
 			},
 			contactInfo: {
 				firstName: '',
@@ -42,9 +43,17 @@ const orderSlice = createSlice({
             }
 			return state
 		},
+		setDurationDate(state, action) {
+			state.duration = action.payload
+			return state
+		},
+		setContactInfo(state, action) {
+			state.contactInfo = action.payload
+			return state
+		}
 	},
 })
 
-export const { setLocation, setTentInfo } = orderSlice.actions
+export const { setLocation, setTentInfo, setDurationDate, setContactInfo } = orderSlice.actions
 
 export default orderSlice.reducer

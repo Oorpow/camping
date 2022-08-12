@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Grid, Skeleton, Typography } from '@mui/material'
 import { InputNumber } from 'antd'
-import { useGetTentsQuery } from '../../../../store/reducers/tentsReducers'
 import { useDispatch, useSelector } from 'react-redux'
+import { useGetTentsQuery } from '../../../../store/reducers/tentsReducers'
 import { setTentInfo } from '../../../../store/reducers/orderReducers'
 import styles from './ChooseTent.module.less'
 
@@ -11,7 +11,6 @@ const ChooseTent = () => {
 	const [value, setValue] = useState(0)
 	const orderState = useSelector((state) => state.order)
 	const dispatch = useDispatch()
-	console.log(orderState)
 
 	// 整理帐篷的信息
 	const combineTentInfo = (num, info) => {
@@ -43,10 +42,7 @@ const ChooseTent = () => {
 		// 判断用户的账单里是否已经有同一顶帐篷
 		let isExisted = isTentExisted(tentInfo._id, currentValue)
 		// 若没有，则可以添加
-		if (isExisted) {
-			// 若已存在，找到该顶帐篷，修改其数量即可
-			// console.log('1111')
-		} else {
+		if (!isExisted) {
 			dispatch(setTentInfo(tentInfo))
 		}
 	}

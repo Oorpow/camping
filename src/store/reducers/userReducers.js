@@ -15,9 +15,27 @@ const userApi = createApi({
                     }
                 },
 			}),
+			register: build.mutation({
+				query(data) {
+					return {
+						url: '/users',
+						method: 'post',
+						data
+					}
+				}
+			}),
+			getAuthCode: build.mutation({
+				query(data) {
+					return {
+						url: '/users/email',
+						method: 'post',
+						data
+					}
+				}
+			})
 		}
 	},
 })
 
-export const { useLoginMutation } = userApi
+export const { useLoginMutation, useRegisterMutation, useGetAuthCodeMutation } = userApi
 export default userApi

@@ -1,17 +1,18 @@
 .about_page {
   width: 100%;
+  margin: auto;
 }
 .about_page_banner {
-  height: 400px;
+  height: 600px;
   position: relative;
-  background: url('https://wecamped.com/wp-content/uploads/2022/04/about_wecamp_new.svg') no-repeat;
+  background: url('http://localhost:5005/images/about/banner/banner.png') no-repeat;
   background-size: cover;
-  background-position: bottom center;
+  background-position: center;
 }
 .about_page_banner .about_page_mask {
   position: absolute;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.4);
 }
 .about_page_banner h1 {
   color: #fff;
@@ -21,80 +22,69 @@
   transform: translate(-50%, -50%);
 }
 .about_page_main {
-  width: 80%;
   margin: 100px auto;
 }
-.about_page_main .about_page_story_main {
-  text-align: center;
+.about_page_main_title {
+  color: #3f4247;
+  border-bottom: 4px solid #047469;
+  font-weight: 500;
 }
-.about_page_main .about_page_story_main p {
-  width: 70%;
-  margin: 20px auto;
-  color: #222;
-  font-weight: 400;
-  font-size: 22px;
+.about_page_main .brand_bgc {
+  height: 100%;
+  background: url('http://localhost:5005/images/about/brand/brand.jpg') no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-attachment: fixed;
 }
-.about_page_main .about_page_provide {
-  margin-top: 30px;
-  justify-content: center;
-}
-.about_page_main .about_page_provide_item {
-  display: flex;
-  flex-flow: column wrap;
-  align-items: center;
-}
-.about_page_main .about_page_provide_item img {
-  width: 75px;
-}
-.about_page_main .about_page_provide_item h4 {
-  margin-top: 10px;
-  text-align: center;
-}
-.about_page_main .about_page_card {
-  justify-content: center;
-}
-.about_page_main .about_page_card_item {
+.about_page_main .brand_text {
+  width: 80%;
+  height: 100%;
+  margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  box-shadow: 0px 11px 25px 0px rgba(187, 187, 187, 0.5);
-  height: 320px;
-  padding: 20px;
-  border-radius: 10px;
-}
-.about_page_main .about_page_card_item .card_item_img {
-  display: flex;
-  flex-direction: column;
   align-items: center;
-}
-.about_page_main .about_page_card_item .card_item_img img {
-  width: 75px;
-}
-.about_page_main .about_page_card_item .card_item_img h3 {
-  margin-top: 10px;
-}
-.about_page_main .about_page_card_item .card_item_text {
-  margin-top: 20px;
-}
-.about_page_main .about_page_card_item .card_item_text p {
-  line-height: 22px;
   text-align: center;
-  color: #222;
-  font-weight: 400;
-  font-size: 16px;
 }
-@media screen and (max-width: 1536px) {
-  .about_page_main .about_page_provide {
-    justify-content: space-between;
-  }
+.about_page_main .values_bgc {
+  height: 100%;
+  background: url('http://localhost:5005/images/about/brand_value/our_value.jpeg') no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-attachment: fixed;
+}
+.about_page_main .values_text_lg {
+  display: block;
+}
+.about_page_main .values_text_xs {
+  display: none;
 }
 @media screen and (max-width: 1200px) {
-  .about_page_main .about_page_provide {
-    justify-content: flex-start;
+  .about_page_main .values_text_lg {
+    display: none;
+  }
+  .about_page_main .values_text_xs {
+    display: block;
+  }
+  .about_page_main .brand_text {
+    height: 400px;
+    padding: 10px 0;
   }
 }
 @media screen and (max-width: 768px) {
-  .about_page_main .about_page_story_main p {
-    width: 100%;
+  .about_page_main_title {
+    font-size: 30px;
+  }
+  .about_page_main .brand_text {
+    height: auto;
+    padding: 10px 0;
+  }
+  .about_page_main .story_bgc {
+    height: 300px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .about_page_banner {
+    height: 300px;
   }
 }

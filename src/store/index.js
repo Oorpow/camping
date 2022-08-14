@@ -19,6 +19,7 @@ import pricingApi from './reducers/pricingReducers'
 import locationApi from './reducers/locationReducers'
 import productApi from './reducers/productReducers'
 import orderReducers from './reducers/orderReducers'
+import orderApi from './reducers/orderApi'
 
 const accessPersistConfig = {
 	key: 'access',
@@ -33,6 +34,7 @@ const store = configureStore({
 		[pricingApi.reducerPath]: pricingApi.reducer,
 		[locationApi.reducerPath]: locationApi.reducer,
 		[productApi.reducerPath]: productApi.reducer,
+		[orderApi.reducerPath]: orderApi.reducer,
 		order: orderReducers,
 		access: persistReducer(accessPersistConfig, accessSlice.reducer),
 	},
@@ -48,6 +50,7 @@ const store = configureStore({
 			.concat(pricingApi.middleware)
 			.concat(locationApi.middleware)
 			.concat(productApi.middleware)
+			.concat(orderApi.middleware)
 })
 
 setupListeners(store.dispatch)

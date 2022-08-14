@@ -37,6 +37,7 @@ const ChooseTent = () => {
 
 	// 改变步进器
 	const changeStep = (currentValue, _, item) => {
+		// console.log(currentValue)
 		setValue(currentValue)
 		const tentInfo = combineTentInfo(currentValue, item)
 		// 判断用户的账单里是否已经有同一顶帐篷

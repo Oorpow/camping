@@ -5,6 +5,7 @@ import {
 	Menu,
 	MenuItem,
 	Avatar,
+CssBaseline,
 } from '@mui/material'
 import FormatAlignCenterIcon from '@mui/icons-material/FormatAlignCenter'
 import { NavLink, useNavigate } from 'react-router-dom'
@@ -87,16 +88,16 @@ const Header = () => {
 
 	return (
 		<div className={styles.header}>
+			<CssBaseline />
 			<Grid
 				container
 				margin="auto"
-				alignItems="center"
 				className={styles.header_grid}
 			>
 				<Grid item xs={2}>
 					<div>logo</div>
 				</Grid>
-				{/* 大屏分辨率 */}
+				{/* 大屏分辨率 导航栏 */}
 				<Grid item md={10} className={styles.header_nav_main}>
 					<nav>
 						<ul>
@@ -151,6 +152,7 @@ const Header = () => {
 					</ul>
 				</Grid>
 			</Grid>
+			{/* 汉堡按钮 */}
 			<Menu
 				anchorEl={anchorEl}
 				id="account-menu"

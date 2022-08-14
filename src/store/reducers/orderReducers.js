@@ -4,6 +4,7 @@ const orderSlice = createSlice({
 	name: 'order',
 	initialState: () => {
 		return {
+			userId: '',
 			location: 'Lake',
 			tent: [],
 			duration: {
@@ -50,10 +51,14 @@ const orderSlice = createSlice({
 		setContactInfo(state, action) {
 			state.contactInfo = action.payload
 			return state
+		},
+		setUserId(state, action) {
+			state.userId = action.payload
+			return state
 		}
 	},
 })
 
-export const { setLocation, setTentInfo, setDurationDate, setContactInfo } = orderSlice.actions
+export const { setLocation, setTentInfo, setDurationDate, setContactInfo, setUserId } = orderSlice.actions
 
 export default orderSlice.reducer

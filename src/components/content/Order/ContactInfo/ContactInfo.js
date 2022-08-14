@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
 	Button,
 	CssBaseline,
@@ -11,24 +11,66 @@ import {
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { setContactInfo } from '../../../../store/reducers/orderReducers'
 import { useDispatch, useSelector } from 'react-redux'
+import { useCreateOrderMutation } from '../../../../store/reducers/orderApi'
+import AlertBar from '../../../common/AlertBar/AlertBar'
+import { useNavigate } from 'react-router'
 
 const theme = createTheme()
 
 const ContactInfo = () => {
+	const navigate = useNavigate()
+	// 警示框
+	const [showAlertType, setShowAlertType] = useState({
+		open: false,
+		type: 'success',
+		message: '',
+	})
+	const orderState = useSelector((state) => state.order)
 	const dispatch = useDispatch()
+	const [createOrder, _] = useCreateOrderMutation()
 
-	const handleSubmit = (event) => {
+	// 提交表单
+	const handleSubmit = async (event) => {
 		event.preventDefault()
 		const data = new FormData(event.currentTarget)
-		dispatch(setContactInfo({
-			firstName: data.get('firstName'),
-            lastName: data.get('lastName'),
-            email: data.get('email')
-		}))
+		dispatch(
+			setContactInfo({
+				firstName: data.get('firstName'),
+				lastName: data.get('lastName'),
+				email: data.get('email'),
+			})
+		)
+
+		try {
+			const res = await createOrder(orderState)
+			if (res.data.status === 201) {
+				setShowAlertType({
+					open: true,
+					type: 'success',
+					message: res.data.message,
+				})
+				setTimeout(() => {
+					navigate('/account')
+				}, 2000);
+			} else {
+				setShowAlertType({
+					open: true,
+					type: 'warning',
+					message: res.data.message,
+				})
+			}
+		} catch(error) {
+			setShowAlertType({
+				open: true,
+				type: 'warning',
+				message: error
+			})
+		}
 	}
 
 	return (
 		<ThemeProvider theme={theme}>
+			<AlertBar {...showAlertType} />
 			<Container component="main" maxWidth="xs">
 				{/* <CssBaseline /> */}
 				<Box

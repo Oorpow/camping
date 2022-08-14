@@ -9,9 +9,11 @@ import {
 } from '@mui/material'
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded'
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded'
-import React, { lazy, Suspense } from 'react'
+import React, { lazy, Suspense, useEffect } from 'react'
 import styles from './Order.module.less'
 import Loading from '../../components/common/Loading/Loading'
+import { useDispatch, useSelector } from 'react-redux'
+import { setUserId } from '../../store/reducers/orderReducers'
 
 const Destination = lazy(() =>
 	import('../../components/content/Order/Destination/Destination')
@@ -148,6 +150,13 @@ function HorizontalLinearStepper() {
 }
 
 const Order = () => {
+	const userState = useSelector(state => state.access)
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		dispatch(setUserId(userState.info._id))
+	}, [])
+
 	return (
 		<div className={styles.order_page}>
 			<Grid

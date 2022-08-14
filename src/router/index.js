@@ -28,6 +28,13 @@ const router = [
 				],
 			},
 			{
+				path: 'order',
+				component: () => import('../pages/Order/Order'),
+				meta: {
+					title: 'Order'
+				}
+			},
+			{
 				path: 'account',
 				component: () => import('../pages/Account/Account'),
 				children: [
@@ -66,13 +73,6 @@ const router = [
 					title: 'About',
 				},
 			},
-			{
-				path: 'order',
-				component: () => import('../pages/Order/Order'),
-				meta: {
-					title: 'Order'
-				}
-			}
 		],
 	},
 	{

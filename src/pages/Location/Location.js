@@ -8,8 +8,27 @@ import LocationPark from '../../components/content/Location/LocationPark/Locatio
 import styles from './Location.module.less'
 import { useGetLocationInfoQuery } from '../../store/reducers/locationReducers'
 import { useGetTentsQuery } from '../../store/reducers/tentsReducers'
+import { useSelector } from 'react-redux'
+
+// 预订跳转盒子
+const BookBox = (props) => {
+	const { isLogged } = props
+
+	return (
+		<div className={styles.book_box}>
+			<h4>Ready To Book?</h4>
+			<NavLink
+				to={isLogged ? '/tents' : '/register'}
+				className={styles.book_button}
+			>
+				{isLogged ? 'Choose One Tent' : 'Sign Up Here'}
+			</NavLink>
+		</div>
+	)
+}
 
 const Location = () => {
+	const access = useSelector((state) => state.access)
 	const { data, isSuccess } = useGetLocationInfoQuery()
 	const tentQuery = useGetTentsQuery()
 	const [areaImgs, setAreaImgs] = useState([])
@@ -20,6 +39,7 @@ const Location = () => {
 		result.push(behindData)
 		arr.push(result)
 	}
+
 	useEffect(() => {
 		// 将areaImgs图片数据格式化
 		const formatAreaImgs = (data) => {
@@ -149,12 +169,7 @@ const Location = () => {
 					</Grid>
 
 					{/* card */}
-					<Grid
-						container
-						item
-						direction="column"
-						marginTop="30px"
-					>
+					<Grid container item direction="column" marginTop="30px">
 						<h2>View Our Tents</h2>
 						<Grid container item columnSpacing={1}>
 							{tentQuery.isSuccess
@@ -197,26 +212,13 @@ const Location = () => {
 
 					{/* book in md */}
 					<Grid item className={styles.book_main_lg}>
-						<div className={styles.book_box}>
-							<h4>Ready To Book?</h4>
-							<NavLink
-								to="/register"
-								className={styles.book_button}
-							>
-								Sign Up Here
-							</NavLink>
-						</div>
+						<BookBox isLogged={access.isLogged} />
 					</Grid>
 				</Grid>
 
 				{/* 右列 */}
 				<Grid item lg={3.5} className={styles.book_main}>
-					<div className={styles.book_box}>
-						<h4>Ready To Book?</h4>
-						<NavLink to="/register" className={styles.book_button}>
-							Sign Up Here
-						</NavLink>
-					</div>
+					<BookBox isLogged={access.isLogged} />
 				</Grid>
 			</Grid>
 		</div>

@@ -8,34 +8,54 @@ const userApi = createApi({
 		return {
 			login: build.mutation({
 				query(data) {
-                    return {
-                        url: '/users/login',
-                        method: 'post',
-                        data 
-                    }
-                },
+					return {
+						url: '/users/login',
+						method: 'post',
+						data,
+					}
+				},
 			}),
 			register: build.mutation({
 				query(data) {
 					return {
 						url: '/users',
 						method: 'post',
-						data
+						data,
 					}
-				}
+				},
 			}),
-			getAuthCode: build.mutation({
+			getAuthCode: build.query({
+				query() {
+					return {
+						url: '/code',
+					}
+				},
+			}),
+			getUserInfo: build.query({
+				query(id) {
+					return {
+						url: `/users/${id}`,
+					}
+				},
+			}),
+			updateUserInfo: build.mutation({
 				query(data) {
 					return {
-						url: '/users/email',
-						method: 'post',
-						data
+						url: `/users/${data.userId}`,
+						method: 'put',
+						data,
 					}
-				}
-			})
+				},
+			}),
 		}
 	},
 })
 
-export const { useLoginMutation, useRegisterMutation, useGetAuthCodeMutation } = userApi
+export const {
+	useLoginMutation,
+	useRegisterMutation,
+	useGetAuthCodeQuery,
+	useUpdateUserInfoMutation,
+	useGetUserInfoQuery,
+} = userApi
 export default userApi

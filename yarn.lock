@@ -2869,11 +2869,6 @@ anymatch@^3.0.3, anymatch@~3.1.2:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
-area-data@^5.0.6:
-  version "5.0.6"
-  resolved "https://registry.yarnpkg.com/area-data/-/area-data-5.0.6.tgz#c381c3f88ff9e1050accd07549d206fce2a28d13"
-  integrity sha512-QxLoA+823xXKyhw5S3750I9TToki0OS42HU9ol3rCOsCXfkjtl8RtQ/eoj0cK0Levn4//oEM05FmMumfw/HIlg==
-
 arg@^5.0.2:
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/arg/-/arg-5.0.2.tgz#c81433cc427c92c4dcf4865142dbca6f15acd59c"
@@ -6440,11 +6435,6 @@ lodash.debounce@^4.0.8:
   resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
   integrity sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==
 
-lodash.find@^4.6.0:
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/lodash.find/-/lodash.find-4.6.0.tgz#cb0704d47ab71789ffa0de8b97dd926fb88b13b1"
-  integrity sha512-yaRZoAV3Xq28F1iafWN1+a0rflOej93l1DQUejs3SZ41h2O9UJBoS9aueGjPDgAl4B6tPC0NuuchLKaDQQ3Isg==
-
 lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
@@ -7723,7 +7713,7 @@ prompts@^2.0.1, prompts@^2.4.2:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@15, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
+prop-types@15, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -8190,16 +8180,6 @@ react-app-polyfill@^3.0.0:
     raf "^3.4.1"
     regenerator-runtime "^0.13.9"
     whatwg-fetch "^3.6.2"
-
-react-area-linkage@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/react-area-linkage/-/react-area-linkage-3.0.0.tgz#66faf573309941b44f69def1f84c871cc041f923"
-  integrity sha512-9ImDw5xbrlVuSHakJL22O3wm9eLPW6Qb7817X0IWM23231EDZNwEjla2pmwHc5tkAmFsz3qQnbCoECzu5i4pog==
-  dependencies:
-    array-tree-filter "^2.1.0"
-    classnames "^2.2.5"
-    lodash.find "^4.6.0"
-    prop-types "^15.6.0"
 
 react-date-range@^1.4.0:
   version "1.4.0"

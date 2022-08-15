@@ -1,146 +1,144 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { Grid, Box, Button } from '@mui/material'
 import {
-	Box,
-	TextField,
-	FormControl,
-	InputLabel,
-	OutlinedInput,
-	InputAdornment,
-	IconButton,
-} from '@mui/material'
-import Visibility from '@mui/icons-material/Visibility'
-import VisibilityOff from '@mui/icons-material/VisibilityOff'
-import { pcaa } from 'area-data'
-import { AreaSelect } from 'react-area-linkage'
-import 'react-area-linkage/dist/index.css'
+	FormContainer,
+	TextFieldElement,
+	PasswordElement,
+} from 'react-hook-form-mui'
 import styles from './AccountInfo.module.less'
+import { useUpdateUserInfoMutation } from '../../../../store/reducers/userReducers'
+import AlertBar from '../../../common/AlertBar/AlertBar'
 
-const AccountInfo = () => {
-	const [values, setValues] = useState({
-		password: '',
-		showPassword: false,
+const AccountInfo = (props) => {
+	const { userInfo, refetchInfo } = props
+
+	// 警示框
+	const [showAlertType, setShowAlertType] = useState({
+		open: false,
+		type: 'success',
+		message: '',
 	})
-	const handleChange = (prop) => (event) => {
-		setValues({ ...values, [prop]: event.target.value })
-	}
 
-	// 密码可见性
-	const handleClickShowPassword = () => {
-		setValues({
-			...values,
-			showPassword: !values.showPassword,
+	const [formDefaultValues, setFormDefaultValues] = useState({
+		firstName: userInfo.firstName,
+		lastName: userInfo.lastName,
+		email: userInfo.email,
+		password: userInfo.password,
+	})
+
+	const [updateUserInfoFn, updateObj] = useUpdateUserInfoMutation()
+
+	const emailRegex =
+		/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+	// 更新用户配置
+	const updateOptions = async (data) => {
+		setFormDefaultValues(data)
+		setShowAlertType({
+			open: false,
+			type: 'success',
+			message: '',
 		})
-	}
-
-	const handleMouseDownPassword = (event) => {
-		event.preventDefault()
-	}
-
-	// 省市区三级联动
-	const handleChangeArea = (e) => {
-		console.log(e)
+		try {
+			const res = await updateUserInfoFn({
+				...data,
+				userId: userInfo._id,
+			})
+			if (res.data.status === 200) {
+				setShowAlertType({
+					open: true,
+					type: 'success',
+					message: res.data.message,
+				})
+				setTimeout(() => {
+					refetchInfo()
+				}, 1000)
+			} else {
+				setShowAlertType({
+					open: true,
+					type: 'warning',
+					message: res.data.message,
+				})
+			}
+		} catch (error) {
+			setShowAlertType({
+				open: true,
+				type: 'error',
+				message: error,
+			})
+		}
 	}
 
 	return (
 		<Box
-			component="form"
 			sx={{
-				width: '100%',
-				'& .MuiTextField-root': { m: 1 },
+				marginTop: 5,
+				display: 'flex',
+				flexDirection: 'column',
+				alignItems: 'center',
 			}}
-			noValidate
-			autoComplete="off"
 		>
-			<div className={styles.form_main}>
-				{/* username */}
-				<FormControl
-					style={{ flexDirection: 'row' }}
+			<AlertBar {...showAlertType} />
+
+			<FormContainer
+				defaultValues={formDefaultValues}
+				onSuccess={updateOptions}
+			>
+				<Grid container spacing={2}>
+					<Grid item xs={12} sm={6}>
+						<TextFieldElement
+							id="firstName"
+							name="firstName"
+							label="First Name"
+							autoFocus
+							required
+							fullWidth
+							color="success"
+						/>
+					</Grid>
+					<Grid item xs={12} sm={6}>
+						<TextFieldElement
+							required
+							fullWidth
+							id="lastName"
+							label="Last Name"
+							name="lastName"
+							color="success"
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						<TextFieldElement
+							type="email"
+							required
+							fullWidth
+							id="email"
+							label="Email Address"
+							name="email"
+							autoComplete="email"
+							validation={{ pattern: emailRegex }}
+							color="success"
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						<PasswordElement
+							sx={{ width: '100%' }}
+							label={'Password'}
+							required
+							name={'password'}
+							color="success"
+						/>
+					</Grid>
+				</Grid>
+				<Button
+					type="submit"
 					fullWidth
-					className={styles.name_main_input}
+					variant="contained"
+					sx={{ mt: 3, mb: 2 }}
+					color="success"
 				>
-					<TextField
-						label="First Name"
-						id="firstName"
-						required
-						style={{ width: '46%' }}
-						color="success"
-						className={styles.name_input}
-					/>
-					<TextField
-						label="Last Name"
-						id="lastName"
-						required
-						style={{ width: '50%' }}
-						color="success"
-						className={styles.name_input}
-					/>
-				</FormControl>
-				{/* email */}
-				<FormControl fullWidth>
-					<TextField
-						label="Email Address"
-						id="email"
-						required
-						color="success"
-						className={styles.email_input}
-					/>
-				</FormControl>
-				{/* password */}
-				<FormControl fullWidth sx={{ md: {margin: '10px'} }} className={styles.password_main}>
-					<InputLabel
-						htmlFor="outlined-adornment-password"
-						color="success"
-					>
-						Password
-					</InputLabel>
-					<OutlinedInput
-						id="outlined-adornment-password"
-						type={values.showPassword ? 'text' : 'password'}
-						value={values.password}
-						onChange={handleChange('password')}
-						endAdornment={
-							<InputAdornment position="end">
-								<IconButton
-									aria-label="toggle password visibility"
-									onClick={handleClickShowPassword}
-									onMouseDown={handleMouseDownPassword}
-									edge="end"
-								>
-									{values.showPassword ? (
-										<VisibilityOff />
-									) : (
-										<Visibility />
-									)}
-								</IconButton>
-							</InputAdornment>
-						}
-						label="Password"
-						style={{ width: '98%' }}
-						color="success"
-					/>
-				</FormControl>
-				{/* address */}
-				<FormControl fullWidth>
-					<AreaSelect
-						type="text"
-						level={2}
-						defaultArea={['440000', '440300', '440305']}
-						data={pcaa}
-						onChange={handleChangeArea}
-					/>
-					<TextField
-						id="standard-helperText"
-						label="Detailed Address"
-						defaultValue="Default Value"
-						variant="standard"
-						style={{ marginTop: '20px' }}
-					/>
-				</FormControl>
-				{/* save changes */}
-				<FormControl style={{ margin: '10px' }}>
-					<span className={styles.save_button}>Save Changes</span>
-				</FormControl>
-			</div>
+					Save Changes
+				</Button>
+			</FormContainer>
 		</Box>
 	)
 }

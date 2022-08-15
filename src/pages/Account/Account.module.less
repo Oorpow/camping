@@ -1,67 +1,37 @@
-.account {
-    width: 1200px;
-    margin: 100px auto;
-    border: 1px solid #E2E2E2;
-    padding: 20px;
-    border-radius: 8px;
+@ColumnFlex: {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-    &_sidebar {
-        display: flex;
-        
+.account {
+    margin: auto;
+
+    &_banner {
+        height: 400px;
+        background: url('http://localhost:5005/images/personal/banner.jpg') no-repeat;
         &_avatar {
-            display: flex;
-            align-items: center;
+            @ColumnFlex();
             &_name {
-                display: flex;
-                flex-direction: column;
-                font-size: 16px;
-                font-weight: 400;
-                margin-left: 30px;
-                span {
-                    margin-bottom: 10px;
-                }
+                margin-top: 10px;
+                @ColumnFlex();
             }
         }
+    }
 
-        &_routes {
-            display: flex;
-            &_item {
-                a {
-                    color: inherit;
-                    display: flex;
-                    align-items: center;
-                    img {
-                        width: 20px;
-                        margin-right: 10px;
-                    }
-                }
-
-                .collapse_nosub {
-                    display: flex;
-                    align-items: center;
-                    height: 50px;
-                    img {
-                        width: 20px;
-                        margin-left: 15px;
-                    }
-                }
-            }
+    &_main {
+        margin: 50px 0;
+        justify-content: center;
+        &_box {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
     }
 }
 
 @media screen and (max-width: 1536px) {
-    .account {
-        width: 80%;
-    }
+    
 }
 
 @media screen and (max-width: 900px) {
-    .account {
-        &_sidebar {
-            &_routes {
-                margin-top: 30px;
-            }
-        }
-    }
+    
 }

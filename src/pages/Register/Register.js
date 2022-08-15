@@ -10,13 +10,17 @@ import {
 	Container,
 } from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
-import { FormContainer, TextFieldElement } from 'react-hook-form-mui'
+import {
+	FormContainer,
+	TextFieldElement,
+	PasswordElement,
+} from 'react-hook-form-mui'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router'
 import AlertBar from '../../components/common/AlertBar/AlertBar'
 import {
-	useGetAuthCodeMutation,
+	useGetAuthCodeQuery,
 	useRegisterMutation,
 } from '../../store/reducers/userReducers'
 
@@ -38,6 +42,23 @@ function Copyright(props) {
 	)
 }
 
+// 验证码
+function CodeSvg() {
+	const { data, isSuccess, refetch } = useGetAuthCodeQuery()
+	const changeCode = () => {
+		refetch()
+	}
+
+	return (
+		isSuccess && (
+			<div
+				dangerouslySetInnerHTML={{ __html: data }}
+				onClick={changeCode}
+			></div>
+		)
+	)
+}
+
 const theme = createTheme()
 
 let timer = null
@@ -53,14 +74,11 @@ export default function Register() {
 			password: '',
 		},
 	})
-	const { watch } = formContext
-	let emailValue = watch('email')
 
 	const emailRegex =
 		/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
 	const [registerFn, _] = useRegisterMutation()
-	const [getCodeFn, codeObj] = useGetAuthCodeMutation()
 
 	// 警示框
 	const [showAlertType, setShowAlertType] = useState({
@@ -68,64 +86,12 @@ export default function Register() {
 		type: 'success',
 		message: '',
 	})
-	// 倒计时
-	const [countDown, setCountDown] = useState(60)
-	const [codeEmail, setCodeEmail] = useState('')
-	const [isSend, setIsSend] = useState(true)
-	const [codeText, setCodeText] = useState('Get Code')
-
-	// 发送验证码，并开启倒计时
-	const sendCode = async () => {
-		try {
-			timer = setInterval(() => setCountDown((t) => --t), 1000)
-			setIsSend(true)
-			const res = await getCodeFn({ email: codeEmail })
-			if (res.data.status === 200) {
-				setShowAlertType({
-					open: true,
-					type: 'success',
-					message: res.data.message,
-				})
-			} else {
-				setShowAlertType({
-					open: true,
-					type: 'warning',
-					message: res.data.message,
-				})
-			}
-		} catch (error) {
-			setShowAlertType({
-				open: true,
-				type: 'warning',
-				message: error,
-			})
-		}
-	}
-
-	// 表单信息
-	useEffect(() => {
-		setCodeEmail(emailValue)
-	}, [emailValue])
 
 	// 清除残留副作用
 	useEffect(() => {
 		clearInterval(timer)
 		return () => clearInterval(timer)
 	}, [])
-
-	// 倒计时60秒区间
-	useEffect(() => {
-		// 判断是否存在邮箱，若不存在则禁用按钮
-		setIsSend(codeEmail === '')
-		if (countDown > 0 && countDown < 60) {
-			setIsSend(true)
-			setCodeText(`${countDown} seconds`)
-		} else {
-			clearInterval(timer)
-			setCountDown(60)
-			setCodeText('Get Code')
-		}
-	}, [countDown, codeEmail])
 
 	// 表单提交
 	const handleRegiste = async (data) => {
@@ -140,8 +106,7 @@ export default function Register() {
 				setShowAlertType({
 					open: true,
 					type: 'success',
-					message:
-						'registed successfully, and will redirect to login after 2 seconds',
+					message: res.data.message,
 				})
 				setTimeout(() => {
 					navigate('/login', { replace: true })
@@ -217,7 +182,7 @@ export default function Register() {
 									validation={{ pattern: emailRegex }}
 								/>
 							</Grid>
-							<Grid item xs={7}>
+							<Grid item xs={8}>
 								<TextFieldElement
 									required
 									fullWidth
@@ -226,25 +191,15 @@ export default function Register() {
 									name="verifyCode"
 								/>
 							</Grid>
-							<Grid item xs={5}>
-								<Button
-									variant="contained"
-									sx={{ width: '100%', padding: '15px 16px' }}
-									disabled={isSend}
-									onClick={sendCode}
-								>
-									{codeText}
-								</Button>
+							<Grid item xs={4}>
+								<CodeSvg />
 							</Grid>
 							<Grid item xs={12}>
-								<TextFieldElement
+								<PasswordElement
+									sx={{ width: '100%' }}
+									label={'Password'}
 									required
-									fullWidth
-									name="password"
-									label="Password"
-									type="password"
-									id="password"
-									autoComplete="new-password"
+									name={'password'}
 								/>
 							</Grid>
 						</Grid>

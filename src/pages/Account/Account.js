@@ -1,31 +1,34 @@
 import { Grid, Avatar, Link, Typography, Tab, Box } from '@mui/material'
 import { TabContext, TabList, TabPanel } from '@mui/lab'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import React, { useState } from 'react'
-import { Outlet } from 'react-router'
-import { NavLink } from 'react-router-dom'
 import styles from './Account.module.less'
 import AccountInfo from '../../components/content/Account/AccountInfo/AccountInfo'
 import Order from '../../components/content/Account/Order/Order'
+import { useSelector } from 'react-redux'
+import { useGetUserInfoQuery } from '../../store/reducers/userReducers'
 
 const Account = () => {
+	const user = useSelector((state) => state.access)
+	const { data, isSuccess, refetch } = useGetUserInfoQuery(user.info._id)
+
 	const [tabValue, setTabValue] = useState('Orders')
 
+	// tabs导航栏
 	const sideRoutes = [
 		{
 			name: 'Orders',
-			icon: 'https://www.wecamped.com/wp-content/uploads/2022/03/orders.svg',
 		},
 		{
 			name: 'Account Info',
 		},
 	]
 
+	// 切换tabs组件
 	const handleTabChange = (e, newValue) => {
 		setTabValue(newValue)
 	}
 
-	// 折叠面板
+	// tabs面板
 	const Collapse = () => {
 		return (
 			<TabContext value={tabValue}>
@@ -35,7 +38,11 @@ const Account = () => {
 						aria-label="lab API tabs example"
 					>
 						{sideRoutes.map((item) => (
-							<Tab label={item.name} value={item.name} key={item.name} />
+							<Tab
+								label={item.name}
+								value={item.name}
+								key={item.name}
+							/>
 						))}
 					</TabList>
 				</Box>
@@ -43,62 +50,48 @@ const Account = () => {
 					<Order />
 				</TabPanel>
 				<TabPanel value={sideRoutes[1].name}>
-					<AccountInfo />
+					<AccountInfo userInfo={isSuccess && data.data[0]} refetchInfo={refetch} />
 				</TabPanel>
 			</TabContext>
 		)
 	}
 
 	return (
-		<div className={styles.account}>
-			<Grid container>
-				<Grid container item>
-					{/* <div className={styles.account_sidebar}> */}
-						<Grid item md={3}>
-							{/* avatar */}
-							<div className={styles.account_sidebar_avatar}>
-								<Avatar
-									alt="Remy Sharp"
-									src="/static/images/avatar/1.jpg"
-									sx={{ width: 60, height: 60 }}
-								/>
-								<div
-									className={
-										styles.account_sidebar_avatar_name
-									}
-								>
-									<span>Oorpow</span>
-									<Link
-										href="#"
-										underline="none"
-										color="#ccc"
-									>
-										LOGOUT
-									</Link>
-								</div>
-							</div>
-						</Grid>
-
-						<Grid item md={9}>
-							{/* show when > 1200px*/}
-							<div className={styles.account_sidebar_routes}>
-								<div
-									className={
-										styles.account_sidebar_routes_item
-									}
-								>
-									{/* 折叠面板 */}
-									<Collapse />
-								</div>
-							</div>
-						</Grid>
-
-						{/* show when < 1200px */}
-						<div className={styles.account_sidebar_tabs}></div>
-					{/* </div> */}
+		<Grid container direction="column">
+			{/* banner图区域 */}
+			<Grid
+				container
+				item
+				className={styles.account_banner}
+				justifyContent="center"
+				alignItems="center"
+			>
+				<div className={styles.account_banner_avatar}>
+					<Avatar
+						alt="Remy Sharp"
+						src="/static/images/avatar/1.jpg"
+						sx={{ width: 90, height: 90 }}
+					/>
+					<div className={styles.account_banner_avatar_name}>
+						<Typography
+							variant="subtitle2"
+							gutterBottom
+							color="#fff"
+						>
+							{isSuccess && data.data[0].firstName + data.data[0].lastName}
+						</Typography>
+						<Typography variant="caption" gutterBottom color="#fff">
+							{isSuccess && data.data[0].email}
+						</Typography>
+					</div>
+				</div>
+			</Grid>
+			<Grid container item className={styles.account_main}>
+				<Grid item md={10} className={styles.account_main_box} p={4}>
+					<Collapse />
 				</Grid>
 			</Grid>
-		</div>
+		</Grid>
 	)
 }
 

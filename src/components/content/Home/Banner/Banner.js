@@ -12,7 +12,7 @@ const Banner = () => {
 				className={styles.home_banner_title}
 			>
 				<Grid item xs={10} md={6} style={{ textAlign: 'center' }}>
-					<h1>Camping Made Easy</h1>
+					<h1 style={{color: '#fff'}}>Camping Made Easy</h1>
 					<p>
 						Embark on your high-end camping adventure with WeCamped,
 						a full-service camping solution company that provides

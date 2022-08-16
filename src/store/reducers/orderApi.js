@@ -6,6 +6,13 @@ const orderApi = createApi({
     baseQuery: axiosQuery(),
     endpoints(build) {
         return {
+            getUserOrder: build.query({
+                query(id) {
+                    return {
+                        url: `/order/${id}`
+                    }
+                }
+            }),
             createOrder: build.mutation({
                 query(data) {
                     return {
@@ -19,5 +26,5 @@ const orderApi = createApi({
     }
 })
 
-export const { useCreateOrderMutation } = orderApi
+export const { useCreateOrderMutation, useGetUserOrderQuery } = orderApi
 export default orderApi

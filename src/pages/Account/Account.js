@@ -10,7 +10,6 @@ import { useGetUserInfoQuery } from '../../store/reducers/userReducers'
 const Account = () => {
 	const user = useSelector((state) => state.access)
 	const { data, isSuccess, refetch } = useGetUserInfoQuery(user.info._id)
-
 	const [tabValue, setTabValue] = useState('Orders')
 
 	// tabs导航栏
@@ -47,7 +46,7 @@ const Account = () => {
 					</TabList>
 				</Box>
 				<TabPanel value={sideRoutes[0].name}>
-					<Order />
+					<Order userId={user.info._id} />
 				</TabPanel>
 				<TabPanel value={sideRoutes[1].name}>
 					<AccountInfo userInfo={isSuccess && data.data[0]} refetchInfo={refetch} />
@@ -87,7 +86,7 @@ const Account = () => {
 				</div>
 			</Grid>
 			<Grid container item className={styles.account_main}>
-				<Grid item md={10} className={styles.account_main_box} p={4}>
+				<Grid item xs={10} className={styles.account_main_box} p={4}>
 					<Collapse />
 				</Grid>
 			</Grid>

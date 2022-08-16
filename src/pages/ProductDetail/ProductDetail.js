@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Typography, Skeleton } from '@mui/material'
+import { Grid, Typography, Skeleton, CssBaseline } from '@mui/material'
 import { Carousel, Image } from 'antd'
 import { useNavigate, useParams } from 'react-router'
 import CardItem from '../../components/common/CardItem/CardItem'
@@ -57,39 +57,37 @@ const ProductDetail = () => {
 										<Skeleton width="60%" />
 									</Grid>
 								) : (
-									data.data[0].productInfo.map(
-										(item, index) => (
-											<Grid
-												item
-												xs={6}
-												sm={4}
-												md={6}
-												sx={{
-													display: 'flex',
-													alignItems: 'center',
-												}}
-												key={item._id}
+									data.data[0].productInfo.map((item) => (
+										<Grid
+											item
+											xs={6}
+											sm={4}
+											md={6}
+											sx={{
+												display: 'flex',
+												alignItems: 'center',
+											}}
+											key={item._id}
+										>
+											<img
+												src={
+													process.env
+														.REACT_APP_DEV_URL +
+													item.icon
+												}
+												width="30"
+												height="30"
+												alt=""
+											/>
+											<Typography
+												variant="caption"
+												component="span"
+												marginLeft="5px"
 											>
-												<img
-													src={
-														process.env
-															.REACT_APP_DEV_URL +
-														item.icon
-													}
-													width="30"
-													height="30"
-													alt=""
-												/>
-												<span
-													style={{
-														marginLeft: '10px',
-													}}
-												>
-													{item.content}
-												</span>
-											</Grid>
-										)
-									)
+												{item.content}
+											</Typography>
+										</Grid>
+									))
 								)}
 							</Grid>
 						</Grid>
@@ -126,7 +124,10 @@ const ProductDetail = () => {
 						</Grid>
 						{/* 按钮 */}
 						<div className={styles.book_btn}>
-							<div className={styles.book_btn_inner} onClick={handleNavToBook}>
+							<div
+								className={styles.book_btn_inner}
+								onClick={handleNavToBook}
+							>
 								<span>start booking</span>
 								<div className={styles.book_btn_inner_arrow}>
 									<img
@@ -163,14 +164,20 @@ const ProductDetail = () => {
 								</Grid>
 							) : (
 								data.data[0].productImgs.map((item) => (
-									<div className={styles.carousel_img} key={item._id}>
+									<div
+										className={styles.carousel_img}
+										key={item._id}
+									>
 										<Image
-											src={process.env.REACT_APP_DEV_URL + item.src}
+											src={
+												process.env.REACT_APP_DEV_URL +
+												item.src
+											}
 											style={{
 												width: '100%',
 												height: '100%',
 												borderRadius: '6px',
-												objectFit: 'cover'
+												objectFit: 'cover',
 											}}
 										/>
 									</div>

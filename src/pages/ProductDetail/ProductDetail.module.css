@@ -21,6 +21,7 @@
 .detail_page .book_btn_inner {
   display: flex;
   margin-left: 10px;
+  align-items: center;
 }
 .detail_page .book_btn_inner span {
   font-size: 16px;

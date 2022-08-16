@@ -1,0 +1,86 @@
+@RowFlex: {
+    display: flex;
+    align-items: center;
+}
+.order_title {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.order_item {
+    width: 100%;
+    display: flex;
+
+    &_img {
+        width: 200px;
+        height: 150px;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    &_text {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex: 1;
+        margin-left: 15px;
+        &_desc {
+            &_font {
+                @RowFlex();
+            }
+        }
+        &_detail {
+            display: flex;
+            justify-content: space-between;
+            
+            &_font {
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .order_title {
+        &_main {
+            font-size: 20px;
+            font-weight: 600;
+        }
+    }
+    .order_item {
+        display: flex;
+        flex-direction: column;
+        
+        &_img {
+            width: 100%;
+            height: 250px;
+        }
+
+        &_text {
+            margin-left: 0;
+            &_detail {
+                flex-direction: column-reverse;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .order_item {
+        &_img {
+            height: 200px;
+        }
+    }
+    :global(.css-16i1kyj-MuiTypography-root) {
+        font-size: 14px;
+    }
+    :global(.css-cj3io0-MuiSvgIcon-root) {
+        font-size: 18px;
+    }
+}

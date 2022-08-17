@@ -5,7 +5,7 @@ import CardItem from '../../../common/CardItem/CardItem'
 import { useGetTentsQuery } from '../../../../store/reducers/tentsReducers'
 
 const Browse = () => {
-	const { data, isSuccess, isLoading } = useGetTentsQuery()
+	const { data, isLoading } = useGetTentsQuery()
 
 	return (
 		<Grid container direction="column" margin="100px auto">

@@ -41,7 +41,7 @@ const router = [
 					{
 						path: 'order',
 						component: () =>
-							import('../components/content/Account/Order/Order'),
+							import('../components/content/Account/AccountOrder/AccountOrder'),
 					},
 				],
 			},

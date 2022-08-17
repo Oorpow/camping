@@ -1,5 +1,7 @@
 import axios from 'axios'
 import store from '../store'
+import history from '../router/history'
+import { removeUserInfo } from '../store/reducers/accessReducers'
 
 const request = axios.create({
     baseURL: 'http://localhost:5005/api',
@@ -19,6 +21,12 @@ request.interceptors.request.use(config => {
 request.interceptors.response.use(res => {
     return res
 }, err => {
+    if (err.response.status === 401) {
+        // 用户无权访问，直接送回login页
+        // useHistory只能在hooks使用，因此需要独立拓展history模块
+        store.dispatch(removeUserInfo())
+        history.replace('/login')
+    }
     return Promise.reject(err)
 })
 

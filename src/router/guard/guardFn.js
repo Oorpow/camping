@@ -27,6 +27,11 @@ function lazyLoad(fn, meta) {
 	return <Guard element={lazyElement} meta={meta} handleRouteBefore={handleRouteBefore} />
 }
 
+
+/**
+ * 处理路由参数
+ * @param {*} routes 
+ */
 export function transformRoutes(routes) {
 	const list = []
 	routes.forEach((route) => {

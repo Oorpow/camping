@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React from 'react'
 import { Grid, Typography } from '@mui/material'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import DeckOutlinedIcon from '@mui/icons-material/DeckOutlined'

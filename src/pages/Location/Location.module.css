@@ -1,6 +1,6 @@
 .location {
   width: 1200px;
-  margin: auto;
+  margin: 100px auto;
 }
 .location .book_main .book_box {
   display: flex;
@@ -11,7 +11,7 @@
   border-radius: 8px;
   padding: 20px 0;
   position: sticky;
-  top: 10px;
+  top: 85px;
 }
 .location .book_main .book_box .book_button {
   width: 90%;
@@ -35,7 +35,7 @@
   border-radius: 8px;
   padding: 20px 0;
   position: sticky;
-  top: 10px;
+  top: 85px;
   position: unset;
 }
 .location .book_main_lg .book_box .book_button {

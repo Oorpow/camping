@@ -91,14 +91,13 @@ const Header = () => {
 			<CssBaseline />
 			<Grid
 				container
-				margin="auto"
 				className={styles.header_grid}
 			>
 				<Grid item xs={2}>
 					<div>logo</div>
 				</Grid>
 				{/* 大屏分辨率 导航栏 */}
-				<Grid item md={10} className={styles.header_nav_main}>
+				<Grid item md={6} className={styles.header_nav_main}>
 					<nav>
 						<ul>
 							{router[1].children.slice(3).map((item) => (
@@ -123,7 +122,7 @@ const Header = () => {
 				<Grid
 					container
 					item
-					xs={10}
+					xs={8}
 					direction="row-reverse"
 					className={styles.header_toggle}
 				>

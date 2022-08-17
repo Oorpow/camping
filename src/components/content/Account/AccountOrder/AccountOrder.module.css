@@ -27,7 +27,6 @@
 }
 .order_item_text_desc_font {
   display: flex;
-  align-items: center;
 }
 .order_item_text_detail {
   display: flex;
@@ -35,7 +34,6 @@
 }
 .order_item_text_detail_font {
   display: flex;
-  align-items: center;
 }
 @media screen and (max-width: 768px) {
   .order_title_main {

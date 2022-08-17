@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Grid, Skeleton, Typography } from '@mui/material'
+import { CssBaseline, Grid, Skeleton, Typography } from '@mui/material'
 import { InputNumber } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import { useGetTentsQuery } from '../../../../store/reducers/tentsReducers'
@@ -68,7 +68,7 @@ const ChooseTent = () => {
 							</Grid>
 					  ))
 					: data.data.map((item) => (
-							<Grid item md={6} key={item._id}>
+							<Grid item xs={12} sm={6} md={6} key={item._id}>
 								<div className={styles.tent_item}>
 									<div className={styles.tent_item_img}>
 										<img
@@ -80,7 +80,7 @@ const ChooseTent = () => {
 										/>
 									</div>
 									<div className={styles.tent_item_stepper}>
-										<span>{item.title}</span>
+										<Typography variant="subtitle2">{item.title}</Typography>
 										<InputNumber
 											min={0}
 											max={2}
@@ -91,10 +91,10 @@ const ChooseTent = () => {
 										/>
 									</div>
 									<div className={styles.tent_item_detail}>
-										<span>
+										<Typography variant="caption">
 											{item.capacity} person capacity -{' '}
-										</span>
-										<span>Starting at ${item.price}</span>
+										</Typography>
+										<Typography variant="caption">Starting at ${item.price}</Typography>
 									</div>
 								</div>
 							</Grid>

@@ -2,15 +2,16 @@ import React, { useState } from 'react'
 import { CardActionArea, Grid, Card, CardContent, CardMedia, Typography } from '@mui/material'
 import { Map, Marker, InfoWindow } from 'react-amap'
 import styles from './LocationItem.module.less'
+import { useNavigate } from 'react-router'
 
 const LocationItem = () => {
 	// 经纬度
 	const [currentPos, setCurrentPos] = useState({
-		longitude: 121,
-		latitude: 36,
+		longitude: 118.026331,
+		latitude: 30.855665,
 	})
 	// 信息窗口可见性
-	const [infoVisible, setInfoVisible] = useState(false)
+	const [infoVisible, setInfoVisible] = useState(true)
 
 	// 地图配置项
 	const plugins = [
@@ -22,22 +23,19 @@ const LocationItem = () => {
 		},
 	]
 
-	const mapEvents = {
-		click: (pos) => {
-			console.log(pos)
-			let { lnglat } = pos
-			setCurrentPos({
-				longitude: lnglat.lng,
-				latitude: lnglat.lat,
-			})
-			setInfoVisible(true)
-		},
-	}
-
+	// 信息窗体
 	const infoItem = `<div>
-        <h4>Lng: ${currentPos.longitude}</h4>
-        <h4>Lat: ${currentPos.latitude}</h4>
+        <h5>Phoenix Mountain Forest Park</h5>
+		<small>Lng: ${currentPos.longitude}</small>
+		<br />
+		<small>Ltd: ${currentPos.latitude}</small>
     </div>`
+
+	const navigate = useNavigate()
+
+	const navToLocation = () => {
+		navigate('/location')
+	}
 
 	return (
 		<Grid container direction="column" marginTop="100px">
@@ -51,6 +49,7 @@ const LocationItem = () => {
 							maxWidth: { sm: 800, md: 600 },
 							boxShadow: '0 0 10px 0 rgb(0 0 0 / 15%)',
 						}}
+						onClick={navToLocation}
 					>
 						<CardActionArea>
 							<CardMedia
@@ -75,7 +74,6 @@ const LocationItem = () => {
 					<Map
 						amapkey={'788e08def03f95c670944fe2c78fa76f'}
 						plugins={plugins}
-						events={mapEvents}
 						center={currentPos}
 					>
 						<Marker

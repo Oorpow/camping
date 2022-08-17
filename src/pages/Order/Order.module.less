@@ -4,4 +4,37 @@
     .step_main {
         display: flex;
     }
+    .mobile_step {
+        display: none;
+    }
+    .pc_stepper {
+        width: 70%;
+        margin: auto;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .step_box {
+        width: 400px;
+    }
+    .mobile_step {
+        display: flex !important;
+    }
+    .step_button_prev, .pc_stepper, .step_button_next {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 455px) {
+    .order_page {
+        .step_main {
+            justify-content: center;
+        }
+        .pc_stepper {
+            width: auto;       
+        }
+        .step_box {
+            width: 300px;
+        }
+    }
 }

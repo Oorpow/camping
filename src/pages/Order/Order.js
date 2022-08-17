@@ -7,6 +7,7 @@ import {
 	Box,
 	IconButton,
 } from '@mui/material'
+import MobileStepper from '@mui/material/MobileStepper'
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded'
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded'
 import React, { lazy, Suspense, useEffect } from 'react'
@@ -98,8 +99,37 @@ function HorizontalLinearStepper() {
 	}
 
 	return (
-		<Box sx={{ width: '500px' }}>
+		<Box sx={{ width: '500px' }} className={styles.step_box}>
 			<div className={styles.step_main}>
+				{/* 移动端stepper */}
+				<MobileStepper
+					className={styles.mobile_step}
+					variant="dots"
+					steps={5}
+					position="static"
+					activeStep={activeStep}
+					sx={{ maxWidth: 400, flexGrow: 1, '& .MuiMobileStepper-dotActive': {backgroundColor: '#047469'} }}
+					nextButton={
+						<IconButton
+							color="success"
+							onClick={handleNext}
+							disabled={activeStep === 4}
+						>
+							<ArrowForwardIosRoundedIcon />
+						</IconButton>
+					}
+					backButton={
+						<IconButton
+							color="success"
+							disabled={activeStep === 0}
+							onClick={handleBack}
+							sx={{ mr: 1 }}
+						>
+							<ArrowBackIosNewRoundedIcon />
+						</IconButton>
+					}
+				/>
+				{/* PC端stepper */}
 				<div className={styles.step_button_prev}>
 					<IconButton
 						color="success"
@@ -112,9 +142,8 @@ function HorizontalLinearStepper() {
 				</div>
 				<Stepper
 					activeStep={activeStep}
+					className={styles.pc_stepper}
 					sx={{
-						width: '70%',
-						margin: 'auto',
 						'& .MuiStepIcon-root.Mui-active': { color: '#047469' },
 						'& .MuiStepIcon-root.Mui-completed': {
 							color: '#047469',
@@ -150,7 +179,7 @@ function HorizontalLinearStepper() {
 }
 
 const Order = () => {
-	const userState = useSelector(state => state.access)
+	const userState = useSelector((state) => state.access)
 	const dispatch = useDispatch()
 
 	useEffect(() => {
@@ -163,7 +192,7 @@ const Order = () => {
 				container
 				direction="column"
 				alignItems="center"
-				margin="30px 0"
+				margin="100px 0"
 			>
 				<Grid item>
 					<Typography
@@ -185,11 +214,12 @@ const Order = () => {
 				>
 					<Grid
 						item
+						xs={6}
 						md={10}
 						border="1px solid rgba(63,66,71,.3)"
 						borderRadius="10px"
 						p={2}
-                        sx={{backgroundColor: 'white'}}
+						sx={{ backgroundColor: 'white' }}
 					>
 						<HorizontalLinearStepper />
 					</Grid>

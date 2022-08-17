@@ -1,11 +1,11 @@
-import { Grid, Avatar, Link, Typography, Tab, Box } from '@mui/material'
+import { Grid, Avatar, Typography, Tab, Box } from '@mui/material'
 import { TabContext, TabList, TabPanel } from '@mui/lab'
 import React, { useState } from 'react'
-import styles from './Account.module.less'
 import AccountInfo from '../../components/content/Account/AccountInfo/AccountInfo'
-import Order from '../../components/content/Account/Order/Order'
+import AccountOrder from '../../components/content/Account/AccountOrder/AccountOrder'
 import { useSelector } from 'react-redux'
 import { useGetUserInfoQuery } from '../../store/reducers/userReducers'
+import styles from './Account.module.less'
 
 const Account = () => {
 	const user = useSelector((state) => state.access)
@@ -46,10 +46,13 @@ const Account = () => {
 					</TabList>
 				</Box>
 				<TabPanel value={sideRoutes[0].name}>
-					<Order userId={user.info._id} />
+					<AccountOrder userId={user.info._id} />
 				</TabPanel>
 				<TabPanel value={sideRoutes[1].name}>
-					<AccountInfo userInfo={isSuccess && data.data[0]} refetchInfo={refetch} />
+					<AccountInfo
+						userInfo={isSuccess && data.data[0]}
+						refetchInfo={refetch}
+					/>
 				</TabPanel>
 			</TabContext>
 		)
@@ -69,7 +72,7 @@ const Account = () => {
 					<Avatar
 						alt="Remy Sharp"
 						src="/static/images/avatar/1.jpg"
-						sx={{ width: 90, height: 90 }}
+						sx={{ width: 90, height: 90, cursor: 'pointer' }}
 					/>
 					<div className={styles.account_banner_avatar_name}>
 						<Typography
@@ -77,7 +80,8 @@ const Account = () => {
 							gutterBottom
 							color="#fff"
 						>
-							{isSuccess && data.data[0].firstName + data.data[0].lastName}
+							{isSuccess &&
+								data.data[0].firstName + data.data[0].lastName}
 						</Typography>
 						<Typography variant="caption" gutterBottom color="#fff">
 							{isSuccess && data.data[0].email}

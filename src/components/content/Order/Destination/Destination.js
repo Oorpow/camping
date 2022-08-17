@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setLocation } from '../../../../store/reducers/orderReducers'
 
 const Destination = () => {
-	const [value, setValue] = useState('Lake')
+	const [value, setValue] = useState('Lake Perris Recreation Area')
 	const dispatch = useDispatch()
 
 	const handleChange = (event) => {
@@ -32,13 +32,13 @@ const Destination = () => {
 					onChange={handleChange}
 				>
 					<FormControlLabel
-						value="Lake"
+						value="Lake Perris Recreation Area"
 						control={<Radio color="success" />}
 						label="Lake Perris Recreation Area"
                         style={{display: 'flex', flexDirection: "row-reverse", justifyContent: "space-between" , margin: '0'}}
 					/>
 					<FormControlLabel
-						value="Neill"
+						value="O'Neill Regional Park"
 						control={<Radio color="success" />}
 						label="O'Neill Regional Park"
                         style={{display: 'flex', flexDirection: "row-reverse", justifyContent: "space-between", margin: '0'}}

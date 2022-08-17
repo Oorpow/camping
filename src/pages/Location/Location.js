@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
+import { Map, Marker, InfoWindow } from 'react-amap'
 import { Grid, Skeleton } from '@mui/material'
 import CardItem from '../../components/common/CardItem/CardItem'
 import LocationInfo from '../../components/content/Location/LocationInfo/LocationInfo'
-import LocationMap from '../../components/content/Location/LocationMap/LocationMap'
+// import LocationMap from '../../components/content/Location/LocationMap/LocationMap'
 import LocationPark from '../../components/content/Location/LocationPark/LocationPark'
 import styles from './Location.module.less'
 import { useGetLocationInfoQuery } from '../../store/reducers/locationReducers'
@@ -130,9 +131,24 @@ const Location = () => {
 					</Grid>
 
 					{/* map */}
-					<Grid item className={styles.location_map}>
-						<LocationMap />
-					</Grid>
+					{/* <Grid item className={styles.location_map}>
+						<Map
+							amapkey={'788e08def03f95c670944fe2c78fa76f'}
+							plugins={plugins}
+							center={currentPos}
+						>
+							<Marker
+								position={currentPos ? currentPos : null}
+								clickable={true}
+							/>
+							<InfoWindow
+								position={currentPos ? currentPos : null}
+								isCustom={false}
+								visible={infoVisible}
+								content={infoItem}
+							/>
+						</Map>
+					</Grid> */}
 
 					{/* park */}
 					<Grid item className={styles.location_park}>

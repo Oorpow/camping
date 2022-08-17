@@ -4,7 +4,7 @@ import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
 import { useGetUserOrderQuery } from '../../../../store/reducers/orderApi'
-import styles from './Order.module.less'
+import styles from './AccountOrder.module.less'
 
 const SubIconItem = (props) => {
 	const { title, icon, num } = props
@@ -111,7 +111,7 @@ const OrderItem = (props) => {
 	)
 }
 
-const Order = (props) => {
+const AccountOrder = (props) => {
 	const { userId } = props
 	const { data, isSuccess, isLoading } = useGetUserOrderQuery(userId)
 	const [totalPrice, setTotalPrice] = useState(0)
@@ -152,4 +152,4 @@ const Order = (props) => {
 	)
 }
 
-export default Order
+export default AccountOrder

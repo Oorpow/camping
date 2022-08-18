@@ -99,6 +99,11 @@ export const onRouteBefore = ({ pathname, meta }) => {
 		document.title = meta.title
 	}
 	const globalState = store.getState()
+	if (pathname === '/register') {
+		return '/register'
+	} else if (pathname === '/login') {
+		return '/login'
+	}
 	if (!globalState.access.isLogged) {
 		return '/login'
 	}

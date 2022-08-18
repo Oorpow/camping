@@ -4,6 +4,7 @@ import {
 	Box,
 	Grid,
 } from '@mui/material'
+import { message } from 'antd'
 import {
 	FormContainer,
 	TextFieldElement,
@@ -12,7 +13,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { setContactInfo } from '../../../../store/reducers/orderReducers'
 import { useDispatch, useSelector } from 'react-redux'
 import { useCreateOrderMutation } from '../../../../store/reducers/orderApi'
-import AlertBar from '../../../common/AlertBar/AlertBar'
 import { useNavigate } from 'react-router'
 
 const theme = createTheme()
@@ -21,17 +21,8 @@ const ContactInfo = () => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 
-	// 警示框
-	const [showAlertType, setShowAlertType] = useState({
-		open: false,
-		type: 'success',
-		message: '',
-	})
-
 	const emailRegex =
 		/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-
-	const firstUpdate = useRef(true)
 
 	const user = useSelector((state) => state.access)
 	const orderState = useSelector((state) => state.order)
@@ -42,24 +33,18 @@ const ContactInfo = () => {
 	})
 	const [createOrder, _] = useCreateOrderMutation()
 
+	// 首次渲染
+	const firstUpdate = useRef(true)
 	useLayoutEffect(() => {
 		const createUserOrder = async () => {
 			const res = await createOrder(orderState)
 			if (res.data.status === 201) {
-				setShowAlertType({
-					open: true,
-					type: 'success',
-					message: res.data.message
-				})
+				message.success(res.data.message)
 				setTimeout(() => {
 					navigate('/account')
 				}, 2000)
 			} else {
-				setShowAlertType({
-					open: true,
-					type: 'warning',
-					message: res.data.message
-				})
+				message.warn(res.data.message)
 			}
 		}
 
@@ -71,11 +56,7 @@ const ContactInfo = () => {
 			try {
 				createUserOrder()
 			} catch (error) {
-				setShowAlertType({
-					open: true,
-					type: 'warning',
-					message: error
-				})
+				message.warn(error)
 			}
 		}
 	}, [orderState])
@@ -87,7 +68,6 @@ const ContactInfo = () => {
 
 	return (
 		<ThemeProvider theme={theme}>
-			<AlertBar {...showAlertType} />
 			<Box
 				sx={{
 					marginTop: 5,
@@ -96,8 +76,6 @@ const ContactInfo = () => {
 					alignItems: 'center',
 				}}
 			>
-				<AlertBar {...showAlertType} />
-
 				<FormContainer
 					defaultValues={formDefaultValues}
 					onSuccess={handleSubmit}

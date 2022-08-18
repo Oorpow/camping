@@ -9,7 +9,7 @@ import styles from './Account.module.less'
 
 const Account = () => {
 	const user = useSelector((state) => state.access)
-	const { data, isSuccess, refetch } = useGetUserInfoQuery(user.info._id)
+	const { data, isSuccess } = useGetUserInfoQuery(user.info._id)
 	const [tabValue, setTabValue] = useState('Orders')
 
 	// tabs导航栏
@@ -49,13 +49,42 @@ const Account = () => {
 					<AccountOrder userId={user.info._id} />
 				</TabPanel>
 				<TabPanel value={sideRoutes[1].name}>
-					<AccountInfo
-						userInfo={isSuccess && data.data[0]}
-						refetchInfo={refetch}
-					/>
+					<AccountInfo userInfo={isSuccess && data.data[0]} />
 				</TabPanel>
 			</TabContext>
 		)
+	}
+
+	function stringToColor(string) {
+		let hash = 0
+		let i
+
+		/* eslint-disable no-bitwise */
+		for (i = 0; i < string.length; i += 1) {
+			hash = string.charCodeAt(i) + ((hash << 5) - hash)
+		}
+
+		let color = '#'
+
+		for (i = 0; i < 3; i += 1) {
+			const value = (hash >> (i * 8)) & 0xff
+			color += `00${value.toString(16)}`.slice(-2)
+		}
+		/* eslint-enable no-bitwise */
+
+		return color
+	}
+
+	function stringAvatar(name) {
+		return {
+			sx: {
+				bgcolor: stringToColor(name),
+				width: 90,
+				height: 90,
+				curpor: 'pointer'
+			},
+			children: name,
+		}
 	}
 
 	return (
@@ -69,11 +98,7 @@ const Account = () => {
 				alignItems="center"
 			>
 				<div className={styles.account_banner_avatar}>
-					<Avatar
-						alt="Remy Sharp"
-						src="/static/images/avatar/1.jpg"
-						sx={{ width: 90, height: 90, cursor: 'pointer' }}
-					/>
+					<Avatar {...stringAvatar(isSuccess && data.data[0].firstName)} />
 					<div className={styles.account_banner_avatar_name}>
 						<Typography
 							variant="subtitle2"

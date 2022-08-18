@@ -9,13 +9,14 @@ import {
 	Grid,
 	Typography,
 } from '@mui/material'
+import { message } from 'antd'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { NavLink, useNavigate } from 'react-router-dom'
-import AlertBar from '../../components/common/AlertBar/AlertBar'
 import { useLoginMutation } from '../../store/reducers/userReducers'
 import { useDispatch } from 'react-redux'
 import { setUserInfo } from '../../store/reducers/accessReducers'
+import styles from './Login.module.less'
 
 function Copyright(props) {
 	return (
@@ -38,11 +39,6 @@ function Copyright(props) {
 const theme = createTheme()
 
 export default function Login() {
-	const [showAlertType, setShowAlertType] = useState({
-		open: false,
-		type: 'success',
-		message: '',
-	})
 	const navigate = useNavigate()
 	const [login, _] = useLoginMutation()
 	const dispatch = useDispatch()
@@ -67,24 +63,15 @@ export default function Login() {
 				)
 				navigate('/home', { replace: true })
 			} else {
-				setShowAlertType({
-					open: true,
-					type: 'error',
-					message: 'login failed, check your email or password',
-				})
+				message.warn(result.data.message)
 			}
 		} catch (error) {
-			setShowAlertType({
-				open: true,
-				type: 'error',
-				message: error,
-			})
+			message.warn(error)
 		}
 	}
 
 	return (
 		<ThemeProvider theme={theme}>
-			<AlertBar {...showAlertType} />
 			<Grid container component="main" sx={{ height: '100vh' }}>
 				<CssBaseline />
 				{/* background image */}
@@ -93,17 +80,7 @@ export default function Login() {
 					xs={false}
 					sm={4}
 					md={7}
-					sx={{
-						backgroundImage:
-							'url(https://source.unsplash.com/random)',
-						backgroundRepeat: 'no-repeat',
-						backgroundColor: (t) =>
-							t.palette.mode === 'light'
-								? t.palette.grey[50]
-								: t.palette.grey[900],
-						backgroundSize: 'cover',
-						backgroundPosition: 'center',
-					}}
+					className={styles.login_background}
 				/>
 
 				<Grid

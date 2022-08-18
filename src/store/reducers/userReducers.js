@@ -4,6 +4,7 @@ import { axiosQuery } from '../axiosQuery'
 const userApi = createApi({
 	reducerPath: 'userApi',
 	baseQuery: axiosQuery(),
+	tagTypes: ['user'],
 	endpoints(build) {
 		return {
 			login: build.mutation({
@@ -37,6 +38,7 @@ const userApi = createApi({
 						url: `/users/${id}`,
 					}
 				},
+				providesTags: ['user']
 			}),
 			updateUserInfo: build.mutation({
 				query(data) {
@@ -46,6 +48,7 @@ const userApi = createApi({
 						data,
 					}
 				},
+				invalidatesTags: ['user']
 			}),
 		}
 	},

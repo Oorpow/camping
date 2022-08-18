@@ -50,6 +50,11 @@
 .detail_page .book_btn:hover .book_btn_dot {
   opacity: 0;
 }
+.detail_page .tent_title {
+  color: #3f4247;
+  border-bottom: 4px solid #047469;
+  font-weight: 500;
+}
 .detail_page :global(.ant-carousel .ant-image) {
   height: 400px;
 }

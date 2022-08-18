@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { message } from 'antd'
 import { Grid, Box, Button } from '@mui/material'
 import {
 	FormContainer,
@@ -7,17 +8,9 @@ import {
 } from 'react-hook-form-mui'
 import styles from './AccountInfo.module.less'
 import { useUpdateUserInfoMutation } from '../../../../store/reducers/userReducers'
-import AlertBar from '../../../common/AlertBar/AlertBar'
 
 const AccountInfo = (props) => {
-	const { userInfo, refetchInfo } = props
-
-	// 警示框
-	const [showAlertType, setShowAlertType] = useState({
-		open: false,
-		type: 'success',
-		message: '',
-	})
+	const { userInfo } = props
 
 	const [formDefaultValues, setFormDefaultValues] = useState({
 		firstName: userInfo.firstName,
@@ -34,38 +27,18 @@ const AccountInfo = (props) => {
 	// 更新用户配置
 	const updateOptions = async (data) => {
 		setFormDefaultValues(data)
-		setShowAlertType({
-			open: false,
-			type: 'success',
-			message: '',
-		})
 		try {
 			const res = await updateUserInfoFn({
 				...data,
 				userId: userInfo._id,
 			})
 			if (res.data.status === 200) {
-				setShowAlertType({
-					open: true,
-					type: 'success',
-					message: res.data.message,
-				})
-				setTimeout(() => {
-					refetchInfo()
-				}, 1000)
+				message.success(res.data.message)
 			} else {
-				setShowAlertType({
-					open: true,
-					type: 'warning',
-					message: res.data.message,
-				})
+				message.warn(res.data.message)
 			}
 		} catch (error) {
-			setShowAlertType({
-				open: true,
-				type: 'error',
-				message: error,
-			})
+			message.warn(error)
 		}
 	}
 
@@ -78,8 +51,6 @@ const AccountInfo = (props) => {
 				alignItems: 'center',
 			}}
 		>
-			<AlertBar {...showAlertType} />
-
 			<FormContainer
 				defaultValues={formDefaultValues}
 				onSuccess={updateOptions}

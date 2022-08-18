@@ -1,15 +1,17 @@
+.commonTitle {
+  color: #3f4247;
+  border-bottom: 4px solid #047469;
+  font-weight: 500;
+}
 .pricing_page {
   width: 1100px;
-  margin: auto;
+  margin: 100px auto;
 }
 .pricing_page .pricing_main {
   margin: auto;
 }
 .pricing_page .pricing_container {
   margin: 50px 0;
-}
-.pricing_page .pricing_container h1 {
-  text-align: center;
 }
 .pricing_page .pricing_container_item {
   text-align: center;
@@ -18,15 +20,12 @@
 .pricing_page .package_grid {
   margin: 50px auto;
 }
-.pricing_page .package_grid h1 {
-  text-align: center;
-}
 .pricing_page .package_grid_item {
   text-align: center;
   margin-top: 30px;
 }
-.pricing_page .tent_grid h1 {
-  text-align: center;
+.pricing_page .tent_grid {
+  align-items: center;
 }
 @media screen and (max-width: 1200px) {
   .pricing_page .pricing_container_grid {

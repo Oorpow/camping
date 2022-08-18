@@ -197,11 +197,7 @@ const ProductDetail = () => {
 				>
 					<Typography
 						variant="h5"
-						fontWeight="600"
 						gutterBottom
-						component="div"
-						textAlign="center"
-						sx={{ borderBottom: '3px solid #aab0a7' }}
 						className={styles.tent_title}
 					>
 						OUR TENT COLLECTION

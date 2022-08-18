@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import {
 	Avatar,
 	Button,
 	CssBaseline,
-	Link,
 	Box,
 	Grid,
 	Typography,
 	Container,
 } from '@mui/material'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { message } from 'antd'
 import {
 	FormContainer,
 	TextFieldElement,
 	PasswordElement,
 } from 'react-hook-form-mui'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router'
-import AlertBar from '../../components/common/AlertBar/AlertBar'
+import { NavLink } from 'react-router-dom'
 import {
 	useGetAuthCodeQuery,
 	useRegisterMutation,
@@ -32,10 +32,7 @@ function Copyright(props) {
 			align="center"
 			{...props}
 		>
-			{'Copyright © '}
-			<Link color="inherit" href="https://mui.com/">
-				Your Website
-			</Link>{' '}
+			{'Copyright © Oorpow '}
 			{new Date().getFullYear()}
 			{'.'}
 		</Typography>
@@ -80,13 +77,6 @@ export default function Register() {
 
 	const [registerFn, _] = useRegisterMutation()
 
-	// 警示框
-	const [showAlertType, setShowAlertType] = useState({
-		open: false,
-		type: 'success',
-		message: '',
-	})
-
 	// 清除残留副作用
 	useEffect(() => {
 		clearInterval(timer)
@@ -95,41 +85,23 @@ export default function Register() {
 
 	// 表单提交
 	const handleRegiste = async (data) => {
-		setShowAlertType({
-			open: false,
-			type: 'success',
-			message: '',
-		})
 		try {
 			const res = await registerFn(data)
 			if (res.data.status === 201) {
-				setShowAlertType({
-					open: true,
-					type: 'success',
-					message: res.data.message,
-				})
+				message.success(res.data.message)
 				setTimeout(() => {
 					navigate('/login', { replace: true })
 				}, 2000)
 			} else {
-				setShowAlertType({
-					open: true,
-					type: 'warning',
-					message: res.data.message,
-				})
+				message.warn(res.data.message)
 			}
 		} catch (error) {
-			setShowAlertType({
-				open: true,
-				type: 'error',
-				message: error,
-			})
+			message.warn(error)
 		}
 	}
 
 	return (
 		<ThemeProvider theme={theme}>
-			<AlertBar {...showAlertType} />
 			<Container component="main" maxWidth="xs">
 				<CssBaseline />
 				<Box
@@ -144,7 +116,7 @@ export default function Register() {
 						<LockOutlinedIcon />
 					</Avatar>
 					<Typography component="h1" variant="h5" gutterBottom>
-						Sign up
+						Register
 					</Typography>
 					<FormContainer
 						onSuccess={(data) => handleRegiste(data)}
@@ -213,9 +185,9 @@ export default function Register() {
 						</Button>
 						<Grid container justifyContent="flex-end">
 							<Grid item>
-								<Link href="#" variant="body2">
+								<NavLink to='/login' variant="body2">
 									Already have an account? Sign in
-								</Link>
+								</NavLink>
 							</Grid>
 						</Grid>
 					</FormContainer>

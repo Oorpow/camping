@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Grid, Skeleton } from '@mui/material'
+import { Grid, Skeleton, Typography } from '@mui/material'
 import CardItem from '../../components/common/CardItem/CardItem'
 import PricingCardItem from '../../components/content/Pricing/PricingCardItem/PricingCardItem'
 import PricingPackage from '../../components/content/Pricing/PricingPackage/PricingPackage'
@@ -24,8 +24,9 @@ const Pricing = () => {
 					item
 					className={styles.pricing_container}
 					direction="column"
+					alignItems="center"
 				>
-					<h1>Pricing</h1>
+					<Typography variant="h5" className={styles.commonTitle}>Pricing</Typography>
 					<Grid
 						container
 						item
@@ -77,8 +78,9 @@ const Pricing = () => {
 					item
 					direction="column"
 					className={styles.package_grid}
+					alignItems="center"
 				>
-					<h1>Prebuilt Package Pricing</h1>
+					<Typography variant="h5" className={styles.commonTitle}>Prebuilt Package Pricing</Typography>
 					<Grid container item spacing={1} justifyContent="center">
 						{prebuilt.isLoading
 							? Array.from(new Array(2)).map((_, i) => (
@@ -118,7 +120,7 @@ const Pricing = () => {
 					direction="column"
 					className={styles.tent_grid}
 				>
-					<h1>Tent Pricing</h1>
+					<Typography variant="h5" className={styles.commonTitle}>Tent Pricing</Typography>
 					<Grid
 						container
 						item

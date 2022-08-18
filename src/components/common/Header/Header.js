@@ -5,17 +5,26 @@ import {
 	Menu,
 	MenuItem,
 	Avatar,
-CssBaseline,
+	CssBaseline,
+	Typography,
 } from '@mui/material'
+import AccessibilityIcon from '@mui/icons-material/Accessibility'
+import LogoutIcon from '@mui/icons-material/Logout'
 import FormatAlignCenterIcon from '@mui/icons-material/FormatAlignCenter'
 import { NavLink, useNavigate } from 'react-router-dom'
 import router from '../../../router'
 import styles from './Header.module.less'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { removeUserInfo } from '../../../store/reducers/accessReducers'
+import { message } from 'antd'
 
 const Header = () => {
+	const store = useSelector((state) => state.access)
+	const navigate = useNavigate()
+	const dispatch = useDispatch()
+
+	// 路由Menu
 	const [anchorEl, setAnchorEl] = React.useState(null)
-	
 	const open = Boolean(anchorEl)
 	const menuProps = {
 		elevation: 0,
@@ -49,21 +58,42 @@ const Header = () => {
 	const handleClose = () => {
 		setAnchorEl(null)
 	}
-	
-	// 导航至 account 页
-	const navigate = useNavigate()
-	const navToAccount = () => {
-		navigate('account')
+
+	// 头像Menu
+	const [accountEl, setAccountEl] = React.useState(null)
+	const accountOpen = Boolean(accountEl)
+	const handleAccountElClick = (e) => {
+		setAccountEl(e.currentTarget)
+	}
+	const handleAccountElClose = () => {
+		setAccountEl(null)
 	}
 
-	const store = useSelector((state) => state.access)
+	// 导航至首页
+	const navToHome = () => {
+		navigate('/home')
+	}
+
+	// 退出登录
+	const logout = () => {
+		dispatch(removeUserInfo())
+		navigate('/login')
+		message.success('logout success')
+	}
 
 	// 已登录显示用户头像，未登录显示另一组件
 	const whenLogin = () => {
 		if (store.isLogged) {
 			return (
 				<li>
-					<IconButton onClick={navToAccount}>
+					<IconButton
+						onClick={handleAccountElClick}
+						size="large"
+						sx={{ ml: 2 }}
+						aria-controls={accountOpen ? 'account-menu' : undefined}
+						aria-haspopup="true"
+						aria-expanded={accountOpen ? 'true' : undefined}
+					>
 						<Avatar>{store.info?.firstName}</Avatar>
 					</IconButton>
 				</li>
@@ -89,12 +119,21 @@ const Header = () => {
 	return (
 		<div className={styles.header}>
 			<CssBaseline />
-			<Grid
-				container
-				className={styles.header_grid}
-			>
+			<Grid container className={styles.header_grid}>
+				{/* logo */}
 				<Grid item xs={2}>
-					<div>logo</div>
+					<div
+						className={styles.header_grid_logo}
+						onClick={navToHome}
+					>
+						<img
+							src={
+								process.env.REACT_APP_DEV_URL +
+								'/images/logo/template.svg'
+							}
+							alt="Go Camping"
+						/>
+					</div>
 				</Grid>
 				{/* 大屏分辨率 导航栏 */}
 				<Grid item md={6} className={styles.header_nav_main}>
@@ -128,7 +167,16 @@ const Header = () => {
 				>
 					<ul>
 						<li>
-							<IconButton onClick={navToAccount}>
+							<IconButton
+								onClick={handleAccountElClick}
+								size="large"
+								sx={{ ml: 2 }}
+								aria-controls={
+									accountOpen ? 'account-menu' : undefined
+								}
+								aria-haspopup="true"
+								aria-expanded={accountOpen ? 'true' : undefined}
+							>
 								<Avatar>{store.info?.firstName}</Avatar>
 							</IconButton>
 						</li>
@@ -137,9 +185,7 @@ const Header = () => {
 								onClick={handleClick}
 								size="large"
 								sx={{ ml: 2 }}
-								aria-controls={
-									open ? 'account-menu' : undefined
-								}
+								aria-controls={open ? 'route-menu' : undefined}
 								aria-haspopup="true"
 								aria-expanded={open ? 'true' : undefined}
 							>
@@ -154,7 +200,7 @@ const Header = () => {
 			{/* 汉堡按钮 */}
 			<Menu
 				anchorEl={anchorEl}
-				id="account-menu"
+				id="route-menu"
 				open={open}
 				onClose={handleClose}
 				onClick={handleClose}
@@ -162,13 +208,39 @@ const Header = () => {
 				transformOrigin={{ horizontal: 'right', vertical: 'top' }}
 				anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
 			>
-				{router[1].children.slice(2).map((item) => (
+				{router[1].children.slice(4).map((item) => (
 					<MenuItem key={item.path}>
-						<NavLink to={item.path}>
+						<NavLink to={item.path} style={{color: '#000'}}>
 							{item.meta && item.meta.title}
 						</NavLink>
 					</MenuItem>
 				))}
+			</Menu>
+			{/* 头像 */}
+			<Menu
+				anchorEl={accountEl}
+				id="account-menu"
+				open={accountOpen}
+				onClose={handleAccountElClick}
+				onClick={handleAccountElClose}
+				PaperProps={menuProps}
+				transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+				anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+			>
+				<MenuItem>
+					<AccessibilityIcon fontSize="small" />
+					<Typography variant="body2">
+						<NavLink to="/account" style={{ color: '#000', marginLeft: '5px' }}>
+							personal
+						</NavLink>
+					</Typography>
+				</MenuItem>
+				<MenuItem onClick={logout}>
+					<LogoutIcon fontSize="small" />
+					<Typography variant="body2" sx={{ color: '#000', marginLeft: '5px' }}>
+						Log out
+					</Typography>
+				</MenuItem>
 			</Menu>
 		</div>
 	)

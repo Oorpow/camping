@@ -131,21 +131,17 @@ const ProductDetail = () => {
 								<span>start booking</span>
 								<div className={styles.book_btn_inner_arrow}>
 									<img
-										src="https://assets.website-files.com/603fe2f06230a89273947382/60df3f5b8d0e32aa58409cdf_play-arrow%201.svg"
-										alt=""
+										src={process.env.REACT_APP_DEV_URL + '/images/icons/triangle.svg'}
 										width="6"
 										height="6"
-										loading="lazy"
 									/>
 								</div>
 							</div>
 							<div className={styles.book_btn_dot}>
 								<img
-									src="https://assets.website-files.com/603fe2f06230a89273947382/60df3f5b078bf95efd1439ba_new-moon%201.svg"
-									alt=""
+									src={process.env.REACT_APP_DEV_URL + '/images/icons/circle.svg'}
 									width="6"
 									height="6"
-									loading="lazy"
 								/>
 							</div>
 						</div>

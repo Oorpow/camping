@@ -6,7 +6,7 @@
 .footer_background {
   width: 100%;
   height: 650px;
-  background: url('http://localhost:5005/images/footer/footer_background.svg') no-repeat;
+  background: url('http://175.178.99.5:5005/images/footer/footer_background.svg') no-repeat;
   background-size: cover;
   background-position: center center;
 }

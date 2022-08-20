@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
-import { Map, Marker, InfoWindow } from 'react-amap'
+import { useSelector } from 'react-redux'
+import LazyLoad from 'react-lazyload'
 import { Grid, Skeleton } from '@mui/material'
 import CardItem from '../../components/common/CardItem/CardItem'
 import LocationInfo from '../../components/content/Location/LocationInfo/LocationInfo'
-// import LocationMap from '../../components/content/Location/LocationMap/LocationMap'
 import LocationPark from '../../components/content/Location/LocationPark/LocationPark'
 import styles from './Location.module.less'
 import { useGetLocationInfoQuery } from '../../store/reducers/locationReducers'
 import { useGetTentsQuery } from '../../store/reducers/tentsReducers'
-import { useSelector } from 'react-redux'
 
 // 预订跳转盒子
 const BookBox = (props) => {
@@ -90,26 +89,30 @@ const Location = () => {
 									>
 										{Array.isArray(item) ? (
 											item.map((sub) => (
+												<LazyLoad key={sub._id}>
+													<img
+														src={
+															process.env
+																.REACT_APP_DEV_URL +
+															sub.src
+														}
+														alt=""
+														key={sub._id}
+													/>
+												</LazyLoad>
+											))
+										) : (
+											<LazyLoad key={item._id}>
 												<img
 													src={
 														process.env
 															.REACT_APP_DEV_URL +
-														sub.src
+														item.src
 													}
 													alt=""
-													key={sub._id}
+													key={item._id}
 												/>
-											))
-										) : (
-											<img
-												src={
-													process.env
-														.REACT_APP_DEV_URL +
-													item.src
-												}
-												alt=""
-												key={item._id}
-											/>
+											</LazyLoad>
 										)}
 									</div>
 								))
@@ -153,7 +156,11 @@ const Location = () => {
 					{/* park */}
 					<Grid item className={styles.location_park}>
 						{isSuccess ? (
-							<LocationPark parkInfo={data.data[0].parkInfo} />
+							<LazyLoad>
+								<LocationPark
+									parkInfo={data.data[0].parkInfo}
+								/>
+							</LazyLoad>
 						) : (
 							<Grid container direction="column">
 								<Skeleton
@@ -201,10 +208,12 @@ const Location = () => {
 												marginTop="20px"
 												key={item.src}
 											>
-												<CardItem
-													key={item._id}
-													{...item}
-												/>
+												<LazyLoad>
+													<CardItem
+														key={item._id}
+														{...item}
+													/>
+												</LazyLoad>
 											</Grid>
 										))
 								: Array.from(new Array(3)).map((_, i) => (

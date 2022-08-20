@@ -1,4 +1,5 @@
 import React from 'react'
+import LazyLoad from 'react-lazyload'
 import {
 	CardActionArea,
 	CardMedia,
@@ -7,8 +8,8 @@ import {
 	Typography,
 } from '@mui/material'
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined'
-import styles from './CardItem.module.less'
 import { useNavigate } from 'react-router'
+import styles from './CardItem.module.less'
 
 const CardItem = (props) => {
 	const { src, title, price, capacity } = props
@@ -28,12 +29,15 @@ const CardItem = (props) => {
 			className={styles.card_main}
 		>
 			<CardActionArea onClick={() => handleNavToDetail(title)}>
-				<CardMedia
-					component="img"
-					image={process.env.REACT_APP_DEV_URL + src}
-					alt={title}
-					className={styles.card_main_img}
-				/>
+				<LazyLoad>
+					<CardMedia
+						component="img"
+						image={process.env.REACT_APP_DEV_URL + src}
+						alt={title}
+						className={styles.card_main_img}
+					/>
+				</LazyLoad>
+
 				<CardContent>
 					<Typography gutterBottom variant="h6" component="div">
 						{title}

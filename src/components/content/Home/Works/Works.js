@@ -1,4 +1,5 @@
 import React from 'react'
+import LazyLoad from 'react-lazyload'
 import { Grid, Skeleton } from '@mui/material'
 import styles from './Works.module.less'
 import { useGetFlowsQuery } from '../../../../store/reducers/flowsReducer'
@@ -28,13 +29,15 @@ const WorkItem = () => {
 						>
 							<div className={styles.work_card}>
 								<div className={styles.work_card_img}>
-									<img
-										src={
-											process.env.REACT_APP_DEV_URL +
-											item.src
-										}
-										alt={item.firstTitle}
-									/>
+									<LazyLoad>
+										<img
+											src={
+												process.env.REACT_APP_DEV_URL +
+												item.src
+											}
+											alt={item.firstTitle}
+										/>
+									</LazyLoad>
 								</div>
 								<div className={styles.work_card_text}>
 									<h4>

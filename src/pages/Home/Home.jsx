@@ -1,10 +1,11 @@
 import React from 'react'
-import Banner from '../../components/content/Home/Banner/Banner'
-import styles from './Home.module.less'
-import Works from '../../components/content/Home/Works/Works'
+import LazyLoad from 'react-lazyload'
 import LocationItem from '../../components/content/Home/LocationItem/LocationItem'
+import Works from '../../components/content/Home/Works/Works'
+import Banner from '../../components/content/Home/Banner/Banner'
 import Browse from '../../components/content/Home/Browse/Browse'
 import { Grid } from '@mui/material'
+import styles from './Home.module.less'
 
 const Home = () => {
 	return (
@@ -13,8 +14,13 @@ const Home = () => {
 			{/* works flow */}
 			<Grid container direction="column" className={styles.home_container}>
 				<Works />
-				<LocationItem />
+				<LazyLoad offset={100}>
+					<LocationItem />
+				</LazyLoad>
+
+				{/* <LazyLoad> */}
 				<Browse />
+				{/* </LazyLoad> */}
 			</Grid>
 		</div>
 	)

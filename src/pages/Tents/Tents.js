@@ -1,8 +1,9 @@
 import React from 'react'
+import LazyLoad from 'react-lazyload'
 import { Grid, Skeleton } from '@mui/material'
 import CardItem from '../../components/common/CardItem/CardItem'
-import styles from './Tents.module.less'
 import { useGetTentsQuery } from '../../store/reducers/tentsReducers'
+import styles from './Tents.module.less'
 
 const Tents = () => {
 	const { data, isLoading } = useGetTentsQuery()
@@ -46,7 +47,9 @@ const Tents = () => {
 									marginTop="20px"
 									key={item.src}
 								>
-									<CardItem {...item} />
+									<LazyLoad>
+										<CardItem {...item} />
+									</LazyLoad>
 								</Grid>
 						  ))}
 				</Grid>

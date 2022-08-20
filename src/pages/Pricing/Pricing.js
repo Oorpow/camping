@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react'
+import LazyLoad from 'react-lazyload'
 import { Grid, Skeleton, Typography } from '@mui/material'
 import CardItem from '../../components/common/CardItem/CardItem'
 import PricingCardItem from '../../components/content/Pricing/PricingCardItem/PricingCardItem'
 import PricingPackage from '../../components/content/Pricing/PricingPackage/PricingPackage'
-import styles from './Pricing.module.less'
 import { useGetTentsQuery } from '../../store/reducers/tentsReducers'
 import {
 	useGetPricingIconsQuery,
 	useGetPrebuiltQuery,
 } from '../../store/reducers/pricingReducers'
+import styles from './Pricing.module.less'
 
 const Pricing = () => {
 	const prebuilt = useGetPrebuiltQuery()
@@ -66,7 +67,9 @@ const Pricing = () => {
 										}
 										key={i}
 									>
-										<PricingCardItem {...item} />
+										<LazyLoad>
+											<PricingCardItem {...item} />
+										</LazyLoad>
 									</Grid>
 							  ))}
 					</Grid>

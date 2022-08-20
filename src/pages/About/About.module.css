@@ -5,7 +5,7 @@
 .about_page_banner {
   height: 600px;
   position: relative;
-  background: url('http://localhost:5005/images/about/banner/banner.png') no-repeat;
+  background: url('http://175.178.99.5:5005/images/about/banner/banner.png') no-repeat;
   background-size: cover;
   background-position: center;
 }
@@ -31,7 +31,7 @@
 }
 .about_page_main .brand_bgc {
   height: 100%;
-  background: url('http://localhost:5005/images/about/brand/brand.jpg') no-repeat;
+  background: url('http://175.178.99.5:5005/images/about/brand/brand.jpg') no-repeat;
   background-size: cover;
   background-position: 50% 50%;
   background-attachment: fixed;
@@ -48,7 +48,7 @@
 }
 .about_page_main .values_bgc {
   height: 100%;
-  background: url('http://localhost:5005/images/about/brand_value/our_value.jpeg') no-repeat;
+  background: url('http://175.178.99.5:5005/images/about/brand_value/our_value.jpeg') no-repeat;
   background-size: cover;
   background-position: 50% 50%;
   background-attachment: fixed;

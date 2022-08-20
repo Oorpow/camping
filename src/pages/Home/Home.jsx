@@ -1,14 +1,11 @@
-import React, { lazy, Suspense } from 'react'
+import React from 'react'
 import LazyLoad from 'react-lazyload'
 import LocationItem from '../../components/content/Home/LocationItem/LocationItem'
-// import Browse from '../../components/content/Home/Browse/Browse'
+import Works from '../../components/content/Home/Works/Works'
+import Banner from '../../components/content/Home/Banner/Banner'
+import Browse from '../../components/content/Home/Browse/Browse'
 import { Grid } from '@mui/material'
 import styles from './Home.module.less'
-import Loading from '../../components/common/Loading/Loading'
-
-const Banner = lazy(() => import('../../components/content/Home/Banner/Banner'))
-const Works = lazy(() => import('../../components/content/Home/Works/Works'))
-const Browse = lazy(() => import('../../components/content/Home/Browse/Browse'))
 
 const Home = () => {
 	return (
@@ -21,9 +18,9 @@ const Home = () => {
 					<LocationItem />
 				</LazyLoad>
 
-				<LazyLoad>
-					<Browse />
-				</LazyLoad>
+				{/* <LazyLoad> */}
+				<Browse />
+				{/* </LazyLoad> */}
 			</Grid>
 		</div>
 	)

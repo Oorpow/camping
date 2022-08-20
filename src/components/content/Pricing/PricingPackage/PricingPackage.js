@@ -1,4 +1,5 @@
 import React from 'react'
+import LazyLoad from 'react-lazyload'
 import styles from './PricingPackage.module.less'
 
 const PricingPackage = (props) => {
@@ -7,7 +8,9 @@ const PricingPackage = (props) => {
 	return (
 		<div className={styles.pricing_container_item_card}>
 			<div className={styles.pricing_container_item_card_img}>
-				<img src={process.env.REACT_APP_DEV_URL + src} alt={title} />
+				<LazyLoad>
+					<img src={process.env.REACT_APP_DEV_URL + src} alt={title} />
+				</LazyLoad>
 			</div>
 			<div className={styles.pricing_container_item_card_text}>
 				<h2>{title}</h2>

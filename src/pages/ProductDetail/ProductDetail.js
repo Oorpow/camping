@@ -1,5 +1,6 @@
 import React from 'react'
-import { Grid, Typography, Skeleton, CssBaseline } from '@mui/material'
+import LazyLoad from 'react-lazyload'
+import { Grid, Typography, Skeleton } from '@mui/material'
 import { Carousel, Image } from 'antd'
 import { useNavigate, useParams } from 'react-router'
 import CardItem from '../../components/common/CardItem/CardItem'
@@ -69,16 +70,19 @@ const ProductDetail = () => {
 											}}
 											key={item._id}
 										>
-											<img
-												src={
-													process.env
-														.REACT_APP_DEV_URL +
-													item.icon
-												}
-												width="30"
-												height="30"
-												alt=""
-											/>
+											<LazyLoad>
+												<img
+													src={
+														process.env
+															.REACT_APP_DEV_URL +
+														item.icon
+													}
+													width="30"
+													height="30"
+													alt=""
+												/>
+											</LazyLoad>
+
 											<Typography
 												variant="caption"
 												component="span"
@@ -130,19 +134,29 @@ const ProductDetail = () => {
 							>
 								<span>start booking</span>
 								<div className={styles.book_btn_inner_arrow}>
-									<img
-										src={process.env.REACT_APP_DEV_URL + '/images/icons/triangle.svg'}
-										width="6"
-										height="6"
-									/>
+									<LazyLoad>
+										<img
+											src={
+												process.env.REACT_APP_DEV_URL +
+												'/images/icons/triangle.svg'
+											}
+											width="6"
+											height="6"
+										/>
+									</LazyLoad>
 								</div>
 							</div>
 							<div className={styles.book_btn_dot}>
-								<img
-									src={process.env.REACT_APP_DEV_URL + '/images/icons/circle.svg'}
-									width="6"
-									height="6"
-								/>
+								<LazyLoad>
+									<img
+										src={
+											process.env.REACT_APP_DEV_URL +
+											'/images/icons/circle.svg'
+										}
+										width="6"
+										height="6"
+									/>
+								</LazyLoad>
 							</div>
 						</div>
 					</Grid>
@@ -150,10 +164,10 @@ const ProductDetail = () => {
 					<Grid item xs={12} md={6}>
 						<Carousel effect="fade" autoplay>
 							{isLoading ? (
-								<Grid item xs={6} sm={4} md={12}>
+								<Grid item xs={12}>
 									<Skeleton
 										variant="rectangular"
-										height="400px"
+										height="300px"
 									/>
 									<Skeleton />
 									<Skeleton width="60%" />

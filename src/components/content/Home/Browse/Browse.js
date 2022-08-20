@@ -1,8 +1,9 @@
 import React from 'react'
+import LazyLoad from 'react-lazyload'
 import { Grid, Skeleton } from '@mui/material'
-import styles from './Browse.module.less'
 import CardItem from '../../../common/CardItem/CardItem'
 import { useGetTentsQuery } from '../../../../store/reducers/tentsReducers'
+import styles from './Browse.module.less'
 
 const Browse = () => {
 	const { data, isLoading } = useGetTentsQuery()
@@ -46,7 +47,9 @@ const Browse = () => {
 								className={styles.card}
 								key={item.src}
 							>
-								<CardItem {...item} />
+								<LazyLoad>
+									<CardItem {...item} />
+								</LazyLoad>
 							</Grid>
 					  ))}
 			</Grid>

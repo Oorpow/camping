@@ -27,6 +27,9 @@
 .pricing_page .tent_grid {
   align-items: center;
 }
+.pricing_page :global(.lazyload-wrapper) {
+  position: relative;
+}
 @media screen and (max-width: 1200px) {
   .pricing_page .pricing_container_grid {
     justify-content: center;

@@ -1,12 +1,12 @@
 import React from 'react'
 import LazyLoad from 'react-lazyload'
-import { Grid, Skeleton } from '@mui/material'
+import { Grid } from '@mui/material'
 import CardItem from '../../components/common/CardItem/CardItem'
 import { useGetTentsQuery } from '../../store/reducers/tentsReducers'
 import styles from './Tents.module.less'
 
 const Tents = () => {
-	const { data, isLoading } = useGetTentsQuery()
+	const { data, isSuccess } = useGetTentsQuery()
 
 	return (
 		<div className={styles.tents}>
@@ -17,27 +17,7 @@ const Tents = () => {
 			{/* card */}
 			<div className={styles.tents_main}>
 				<Grid container className={styles.tents_main_grid} columnSpacing={1}>
-					{isLoading
-						? Array.from(new Array(5)).map((_, i) => (
-								<Grid
-									item
-									xs={12}
-									sm={6}
-									md={4}
-									xl={3}
-									marginTop="20px"
-									key={i}
-									p={2}
-								>
-									<Skeleton
-										variant="rectangular"
-										height="200px"
-									/>
-									<Skeleton />
-									<Skeleton width="60%" />
-								</Grid>
-						  ))
-						: data.data.map((item) => (
+					{isSuccess && data.data.map((item) => (
 								<Grid
 									item
 									xs={12}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import LazyLoad from 'react-lazyload'
 import { Grid, Typography, Skeleton } from '@mui/material'
 import { Carousel, Image } from 'antd'
@@ -7,6 +7,8 @@ import CardItem from '../../components/common/CardItem/CardItem'
 import { useGetProductByTypeQuery } from '../../store/reducers/productReducers'
 import { useGetTentsQuery } from '../../store/reducers/tentsReducers'
 import styles from './ProductDetail.module.less'
+import { changeSkeleton } from '../../utils/changeSkeleton'
+import MySkeleton from '../../components/common/MySkeleton/MySkeleton'
 
 const ProductDetail = () => {
 	const { name } = useParams()
@@ -18,6 +20,8 @@ const ProductDetail = () => {
 	const handleNavToBook = () => {
 		navigate('/order')
 	}
+
+	const [status, setStatus] = useState('pending')
 
 	return (
 		<div className={styles.detail_page}>
@@ -161,38 +165,55 @@ const ProductDetail = () => {
 						</div>
 					</Grid>
 					{/* 轮播图 */}
-					<Grid item xs={12} md={6}>
-						<Carousel effect="fade" autoplay>
-							{isLoading ? (
-								<Grid item xs={12}>
-									<Skeleton
-										variant="rectangular"
-										height="300px"
-									/>
-									<Skeleton />
-									<Skeleton width="60%" />
-								</Grid>
-							) : (
+					<Grid item xs={12} md={6} position="relative">
+						<Skeleton
+							variant="rectangular"
+							height="400px"
+							style={{
+								position: 'absolute',
+								inset: 0,
+								visibility:
+									status === 'success' ? 'hidden' : 'visible',
+							}}
+						></Skeleton>
+						<Carousel
+							effect="fade"
+							autoplay
+							style={{
+								visibility:
+									status === 'success' ? 'visible' : 'hidden',
+							}}
+						>
+							{isSuccess &&
 								data.data[0].productImgs.map((item) => (
 									<div
 										className={styles.carousel_img}
 										key={item._id}
 									>
-										<Image
-											src={
-												process.env.REACT_APP_DEV_URL +
-												item.src
-											}
-											style={{
-												width: '100%',
-												height: '100%',
-												borderRadius: '6px',
-												objectFit: 'cover',
-											}}
-										/>
+										<LazyLoad>
+											<Image
+												src={
+													process.env
+														.REACT_APP_DEV_URL +
+													item.src
+												}
+												onLoad={() =>
+													changeSkeleton(
+														'success',
+														setStatus,
+														2000
+													)
+												}
+												style={{
+													width: '100%',
+													height: '100%',
+													borderRadius: '6px',
+													objectFit: 'cover',
+												}}
+											/>
+										</LazyLoad>
 									</div>
-								))
-							)}
+								))}
 						</Carousel>
 					</Grid>
 				</Grid>
@@ -213,38 +234,22 @@ const ProductDetail = () => {
 						OUR TENT COLLECTION
 					</Typography>
 					<Grid container item columnSpacing={1}>
-						{tentData.isLoading
-							? Array.from(new Array(5)).map((_, i) => (
-									<Grid
-										item
-										xs={12}
-										sm={6}
-										md={4}
-										xl={3}
-										marginTop="20px"
-										key={i}
-									>
-										<Skeleton
-											variant="rectangular"
-											height="200px"
-										/>
-										<Skeleton />
-										<Skeleton width="60%" />
-									</Grid>
-							  ))
-							: tentData.data.data.map((item) => (
-									<Grid
-										item
-										xs={12}
-										sm={6}
-										md={4}
-										xl={3}
-										marginTop="20px"
-										key={item.src}
-									>
+						{tentData.isSuccess &&
+							tentData.data.data.map((item) => (
+								<Grid
+									item
+									xs={12}
+									sm={6}
+									md={4}
+									xl={3}
+									marginTop="20px"
+									key={item.src}
+								>
+									<LazyLoad>
 										<CardItem {...item} />
-									</Grid>
-							  ))}
+									</LazyLoad>
+								</Grid>
+							))}
 					</Grid>
 				</Grid>
 			</Grid>

@@ -12,15 +12,21 @@ const Home = () => {
 		<div className={styles.home}>
 			<Banner />
 			{/* works flow */}
-			<Grid container direction="column" className={styles.home_container}>
-				<Works />
+			<Grid
+				container
+				direction="column"
+				className={styles.home_container}
+			>
+				<LazyLoad>
+					<Works />
+				</LazyLoad>
 				<LazyLoad offset={100}>
 					<LocationItem />
 				</LazyLoad>
 
-				{/* <LazyLoad> */}
-				<Browse />
-				{/* </LazyLoad> */}
+				<LazyLoad>
+					<Browse />
+				</LazyLoad>
 			</Grid>
 		</div>
 	)

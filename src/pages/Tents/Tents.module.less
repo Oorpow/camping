@@ -28,25 +28,16 @@
         width: 1300px;
         margin: 50px auto;
     }
+
+    :global(.lazyload-wrapper) {
+        position: relative;
+    }
 }
 
 @media screen and (max-width: 1536px) {
     .tents {
         &_main {
             width: 90%;
-            &_grid {
-                // flex-wrap: nowrap;
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 1200px) {
-    .tents {
-        &_main {
-            &_grid {
-                // justify-content: center;
-            }
         }
     }
 }

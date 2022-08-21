@@ -58,6 +58,9 @@
 .detail_page :global(.ant-carousel .ant-image) {
   height: 400px;
 }
+.detail_page :global(.lazyload-wrapper) {
+  position: relative;
+}
 @media screen and (max-width: 1536px) {
   .detail_page {
     width: 80%;

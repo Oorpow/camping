@@ -25,6 +25,9 @@
   width: 1300px;
   margin: 50px auto;
 }
+.tents :global(.lazyload-wrapper) {
+  position: relative;
+}
 @media screen and (max-width: 1536px) {
   .tents_main {
     width: 90%;

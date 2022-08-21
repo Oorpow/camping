@@ -27,51 +27,31 @@ const Pricing = () => {
 					direction="column"
 					alignItems="center"
 				>
-					<Typography variant="h5" className={styles.commonTitle}>Pricing</Typography>
+					<Typography variant="h5" className={styles.commonTitle}>
+						Pricing
+					</Typography>
 					<Grid
 						container
 						item
 						spacing={1}
 						className={styles.pricing_container_grid}
 					>
-						{pricingIcons.isLoading
-							? Array.from(new Array(4)).map((_, i) => (
-									<Grid
-										item
-										xs={10}
-										sm={5}
-										md={5}
-										lg={3}
-										className={
-											styles.pricing_container_item
-										}
-										key={i}
-									>
-										<Skeleton
-											variant="rectangular"
-											height="200px"
-										/>
-										<Skeleton />
-										<Skeleton width="60%" />
-									</Grid>
-							  ))
-							: pricingIcons.data.data.map((item, i) => (
-									<Grid
-										item
-										xs={10}
-										sm={5}
-										md={5}
-										lg={3}
-										className={
-											styles.pricing_container_item
-										}
-										key={i}
-									>
-										<LazyLoad>
-											<PricingCardItem {...item} />
-										</LazyLoad>
-									</Grid>
-							  ))}
+						{pricingIcons.isSuccess &&
+							pricingIcons.data.data.map((item, i) => (
+								<Grid
+									item
+									xs={10}
+									sm={5}
+									md={5}
+									lg={3}
+									className={styles.pricing_container_item}
+									key={i}
+								>
+									<LazyLoad>
+										<PricingCardItem {...item} />
+									</LazyLoad>
+								</Grid>
+							))}
 					</Grid>
 				</Grid>
 
@@ -83,7 +63,9 @@ const Pricing = () => {
 					className={styles.package_grid}
 					alignItems="center"
 				>
-					<Typography variant="h5" className={styles.commonTitle}>Prebuilt Package Pricing</Typography>
+					<Typography variant="h5" className={styles.commonTitle}>
+						Prebuilt Package Pricing
+					</Typography>
 					<Grid container item spacing={1} justifyContent="center">
 						{prebuilt.isLoading
 							? Array.from(new Array(2)).map((_, i) => (
@@ -123,7 +105,9 @@ const Pricing = () => {
 					direction="column"
 					className={styles.tent_grid}
 				>
-					<Typography variant="h5" className={styles.commonTitle}>Tent Pricing</Typography>
+					<Typography variant="h5" className={styles.commonTitle}>
+						Tent Pricing
+					</Typography>
 					<Grid
 						container
 						item
@@ -131,40 +115,23 @@ const Pricing = () => {
 						columnSpacing={2}
 						className={styles.tent_grid_card_main}
 					>
-						{tents.isLoading
-							? Array.from(new Array(5)).map((_, i) => (
-									<Grid
-										item
-										xs={12}
-										sm={6}
-										md={6}
-										lg={4}
-										xl={3}
-										marginTop="20px"
-										key={i}
-									>
-										<Skeleton
-											variant="rectangular"
-											height="300px"
-										/>
-										<Skeleton />
-										<Skeleton width="60%" />
-									</Grid>
-							  ))
-							: tents.data.data.map((item) => (
-									<Grid
-										item
-										xs={12}
-										sm={6}
-										md={6}
-										lg={4}
-										xl={3}
-										marginTop="20px"
-										key={item.src}
-									>
+						{tents.isSuccess &&
+							tents.data.data.map((item) => (
+								<Grid
+									item
+									xs={12}
+									sm={6}
+									md={6}
+									lg={4}
+									xl={3}
+									marginTop="20px"
+									key={item.src}
+								>
+									<LazyLoad>
 										<CardItem {...item} />
-									</Grid>
-							  ))}
+									</LazyLoad>
+								</Grid>
+							))}
 					</Grid>
 				</Grid>
 			</Grid>

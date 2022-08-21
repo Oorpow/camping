@@ -9,6 +9,8 @@ import LocationPark from '../../components/content/Location/LocationPark/Locatio
 import styles from './Location.module.less'
 import { useGetLocationInfoQuery } from '../../store/reducers/locationReducers'
 import { useGetTentsQuery } from '../../store/reducers/tentsReducers'
+import MySkeleton from '../../components/common/MySkeleton/MySkeleton'
+import { changeSkeleton } from '../../utils/changeSkeleton'
 
 // 预订跳转盒子
 const BookBox = (props) => {
@@ -54,6 +56,8 @@ const Location = () => {
 		formatAreaImgs(data)
 	}, [isSuccess, data])
 
+	const [status, setStatus] = useState('pending')
+
 	return (
 		<div className={styles.location}>
 			<Grid
@@ -98,11 +102,51 @@ const Location = () => {
 														}
 														alt=""
 														key={sub._id}
+														onLoad={() =>
+															changeSkeleton(
+																'success',
+																setStatus,
+																2000
+															)
+														}
+														style={{
+															visibility:
+																status ===
+																'success'
+																	? 'visible'
+																	: 'hidden',
+														}}
+													/>
+													<Skeleton
+														variant="rectangular"
+														style={{
+															position:
+																'absolute',
+															inset: 0,
+															visibility:
+																status ===
+																'success'
+																	? 'hidden'
+																	: 'visible',
+														}}
+														height="150px"
 													/>
 												</LazyLoad>
 											))
 										) : (
 											<LazyLoad key={item._id}>
+												<Skeleton
+													variant="rectangular"
+													style={{
+														position: 'absolute',
+														inset: 0,
+														visibility:
+															status === 'success'
+																? 'hidden'
+																: 'visible',
+													}}
+													height="300px"
+												/>
 												<img
 													src={
 														process.env
@@ -111,6 +155,19 @@ const Location = () => {
 													}
 													alt=""
 													key={item._id}
+													onLoad={() =>
+														changeSkeleton(
+															'success',
+															setStatus,
+															2000
+														)
+													}
+													style={{
+														visibility:
+															status === 'success'
+																? 'visible'
+																: 'hidden',
+													}}
 												/>
 											</LazyLoad>
 										)}
@@ -133,43 +190,14 @@ const Location = () => {
 						</h5>
 					</Grid>
 
-					{/* map */}
-					{/* <Grid item className={styles.location_map}>
-						<Map
-							amapkey={'788e08def03f95c670944fe2c78fa76f'}
-							plugins={plugins}
-							center={currentPos}
-						>
-							<Marker
-								position={currentPos ? currentPos : null}
-								clickable={true}
-							/>
-							<InfoWindow
-								position={currentPos ? currentPos : null}
-								isCustom={false}
-								visible={infoVisible}
-								content={infoItem}
-							/>
-						</Map>
-					</Grid> */}
-
 					{/* park */}
 					<Grid item className={styles.location_park}>
-						{isSuccess ? (
+						{isSuccess && (
 							<LazyLoad>
 								<LocationPark
 									parkInfo={data.data[0].parkInfo}
 								/>
 							</LazyLoad>
-						) : (
-							<Grid container direction="column">
-								<Skeleton
-									variant="rectangular"
-									height="200px"
-								/>
-								<Skeleton />
-								<Skeleton width="60%" />
-							</Grid>
 						)}
 					</Grid>
 

@@ -1,3 +1,6 @@
 .card {
   width: 100%;
 }
+.card :global(.lazyload-wrapper) {
+  position: relative;
+}

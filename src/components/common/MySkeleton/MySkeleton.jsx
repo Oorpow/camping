@@ -3,7 +3,7 @@ import { Grid, Skeleton } from '@mui/material'
 import styles from './MySkeleton.module.less'
 
 const MySkeleton = (props) => {
-    const { status } = props
+    const { status, height } = props
 
 	return (
 		<Grid
@@ -14,7 +14,7 @@ const MySkeleton = (props) => {
 			}}
 			className={styles.skeleton_main}
 		>
-			<Skeleton variant="rectangular" height="250px" />
+			<Skeleton variant="rectangular" height={height || '250px'} />
 			<Skeleton />
 			<Skeleton width="60%" />
 		</Grid>

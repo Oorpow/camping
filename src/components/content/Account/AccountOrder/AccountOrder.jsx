@@ -26,8 +26,17 @@ const SubIconItem = (props) => {
 }
 
 const OrderItem = (props) => {
-	const { item, totalPrice } = props
+	const { item } = props
+	let totalPrice = 0
 
+	if (item.tent.length > 1) {
+		totalPrice = item.tent.reduce((prev, next) => {
+			return prev.num * prev.price + next.num * next.price
+		})
+	} else {
+		totalPrice = item.tent[0].num * item.tent[0].price
+	}
+	
 	return (
 		// 标题
 		<>
@@ -114,19 +123,6 @@ const OrderItem = (props) => {
 const AccountOrder = (props) => {
 	const { userId } = props
 	const { data, isSuccess, isLoading } = useGetUserOrderQuery(userId)
-	const [totalPrice, setTotalPrice] = useState(0)
-	let tempPrice = 0
-
-	useEffect(() => {
-		if (isSuccess) {
-			for (let i = 0; i < data.data.length; i++) {
-				tempPrice = data.data[i].tent.reduce((prev, next) => {
-					return prev.num * prev.price + next.num * next.price
-				})
-				setTotalPrice(tempPrice)
-			}
-		}
-	}, [tempPrice])
 
 	return (
 		<Grid container direction="column">
@@ -144,8 +140,8 @@ const AccountOrder = (props) => {
 						</Grid>
 				  ))
 				: data.data.map((item) => (
-						<Grid container item key={item._id} rowSpacing={2}>
-							<OrderItem item={item} totalPrice={totalPrice} />
+						<Grid container item key={item._id} rowSpacing={2} marginTop="15px">
+							<OrderItem item={item} />
 						</Grid>
 				  ))}
 		</Grid>

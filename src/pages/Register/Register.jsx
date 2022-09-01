@@ -23,6 +23,7 @@ import {
 	useGetAuthCodeQuery,
 	useRegisterMutation,
 } from '../../store/reducers/userReducers'
+import styles from './Register.module.less'
 
 function Copyright(props) {
 	return (
@@ -51,6 +52,7 @@ function CodeSvg() {
 			<div
 				dangerouslySetInnerHTML={{ __html: data }}
 				onClick={changeCode}
+				className={styles.codeSvg}
 			></div>
 		)
 	)

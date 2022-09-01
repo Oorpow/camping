@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/226.d72897e7.chunk.js","mappings":"6IAOA,UAJgB,WACf,OAAO,SAAC,EAAAA,OAAD,GACP,C","sources":["pages/Product/Product.jsx"],"sourcesContent":["import React from 'react'\r\nimport { Outlet } from 'react-router'\r\n\r\nconst Product = () => {\r\n\treturn <Outlet />\r\n}\r\n\r\nexport default Product\r\n"],"names":["Outlet"],"sourceRoot":""}

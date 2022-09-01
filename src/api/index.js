@@ -4,7 +4,7 @@ import history from '../router/history'
 import { removeUserInfo } from '../store/reducers/accessReducers'
 
 const request = axios.create({
-    baseURL: 'http://localhost:5005/api',
+    baseURL: process.env.REACT_APP_DEV_URL + '/api',
     withCredentials: true
 })
 

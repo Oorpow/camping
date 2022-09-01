@@ -10,7 +10,7 @@ const PricingCardItem = (props) => {
 
 	return (
 		<>
-			<MySkeleton status={status} />
+			<MySkeleton status={status} height="150px" />
 			<div
 				className={styles.pricing_container_item_card}
 				style={{

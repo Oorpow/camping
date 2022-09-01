@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/334.5f8e3701.chunk.css","mappings":"AAAA,oCACI,6BAGQ,WAAY,CADZ,WACV,CACF","sources":["pages/Register/Register.module.less"],"sourcesContent":["@media screen and (max-width: 500px) {\n    .codeSvg {\n        svg {\n            width: 100px;\n            height: 70px;\n        }\n    }\n}"],"names":[],"sourceRoot":""}
